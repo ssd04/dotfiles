@@ -1,0 +1,5 @@
+alias cls='clear'
+alias lxc-ls='sudo lxc-ls --fancy'
+alias google='google-chrome'
+alias g='google-chrome'
+alias pdf='xdg-open'
