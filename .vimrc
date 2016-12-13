@@ -7,10 +7,10 @@ set nocompatible               " Be iMproved
 endif
 
 " Required:
-set runtimepath+=/home/ssd04/.vim/bundle/neobundle.vim/
+set runtimepath+=~/.vim/bundle/neobundle.vim/
 
 " Required:
-call neobundle#begin(expand('/home/ssd04/.vim/bundle'))
+call neobundle#begin(expand('~/.vim/bundle'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
