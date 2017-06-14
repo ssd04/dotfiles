@@ -20,14 +20,23 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'itchyny/landscape.vim'
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'nanotech/jellybeans.vim'
+"NeoBundle 'vim-airline/vim-airline'
+NeoBundle 'powerline/powerline'
+"NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'kiddos/malokai.vim'
+
+" HTML
+NeoBundle 'othree/html5.vim'
+NeoBundle 'othree/html5-syntax.vim'
+NeoBundle 'mattn/emmet-vim'
 
 " python
-NeoBundle 'klen/python-mode'
-
+"NeoBundle 'klen/python-mode'
+""
 " php
 NeoBundle 'joonty/vdebug'
+NeoBundle 'brookhong/dbgpavim'
 
 
 " You can specify revision/branch/tag.
@@ -37,7 +46,7 @@ NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 call neobundle#end()
 
 " Required:
-filetype plugin indent on
+filetype indent on
 
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
@@ -46,12 +55,12 @@ NeoBundleCheck
   
 
 "- Basic setup -
-" set nocompatible
+set nocompatible
 
 " enable syntax and plugins
-" syntax enable
-" filetype plugin on
-" autocmd vimenter * NERDTree
+syntax enable
+filetype plugin on
+"autocmd vimenter * NERDTree
 
 colorscheme landscape
 set laststatus=2
@@ -60,6 +69,7 @@ set laststatus=2
 let mapleader=','
 
 set number
+set relativenumber
 set numberwidth=4
 "highlight LineNr ctermfg=grey
 
@@ -69,7 +79,7 @@ set shiftwidth=4
 set smartindent
 set expandtab
 
-" set smarttab
+set smarttab
 " set softtabstop=4
 
 set ruler
@@ -78,10 +88,14 @@ set undolevels=100
 
 " mappings
 inoremap jk <esc>
-inoremap .' <esc>
+inoremap kj <esc>
+inoremap kl <esc>
 "nnoremap ; <shift>:
 
 "inoremap <esc> <nop>
+
+" Emmet configurations
+let g:user_emmet_leader_key='<C-L>'
 
 " -----Configuration from mbrochh - github------
 
@@ -98,3 +112,5 @@ vnoremap < <gv
 " better indentation
 vnoremap > >gv
 " better indentation
+
+set pastetoggle=<F2>
