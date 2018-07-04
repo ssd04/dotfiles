@@ -1,42 +1,67 @@
-set runtimepath+=~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim
-let s:bundle_dir = expand('~/.config/nvim/bundle')
-let s:plugin_dir = s:bundle_dir . '/repos/github.com'
+" Neovim configuration file - ssd04
+"
+if &compatible
+    set nocompatible
+endif
+" Add the dein installation directory into runtimepath
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-if dein#load_state(s:bundle_dir)
-    call dein#begin(s:bundle_dir)
+if dein#load_state('~/.cache/dein')
+    call dein#begin('~/.cache/dein')
 
-    call dein#add(s:plugin_dir . '/Shougo/dein.vim')
-    call dein#add('christoomey/vim-tmux-navigator')
-    call dein#add('ryanoasis/vim-devicons')
-    call dein#add('w0rp/ale')
-    call dein#add('nelstrom/vim-visual-star-search')
-    call dein#add('mileszs/ack.vim')
-    call dein#add('Raimondi/delimitMate')
-    call dein#add('mattn/emmet-vim')
+    call dein#add('~/.cache/dein')
+    "call dein#add('Shougo/deoplete.nvim')
+    call dein#add('scrooloose/nerdtree')
+    call dein#add('scrooloose/syntastic')
+    call dein#add('vim-airline/vim-airline')
+    call dein#add('vim-airline/vim-airline-themes')
+    call dein#add('kristijanhusak/vim-hybrid-material')
     call dein#add('tpope/vim-commentary')
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-fugitive')
-    call dein#add('scrooloose/nerdtree')
-    call dein#add('airblade/vim-gitgutter')
-    call dein#add('vim-airline/vim-airline')
-    call dein#add('vim-airline/vim-airline-themes')
-    call dein#add('duff/vim-bufonly')
-    call dein#add('gregsexton/MatchTag')
-    call dein#add('sheerun/vim-polyglot')
-    call dein#add('kristijanhusak/vim-hybrid-material')
-    call dein#add('Shougo/deoplete.nvim')
-    call dein#add('Shougo/neosnippet')
-    call dein#add('honza/vim-snippets')
-    call dein#add('dyng/ctrlsf.vim')
-    call dein#add('ctrlpvim/ctrlp.vim')
-    call dein#add('junegunn/goyo.vim')
+    call dein#add('w0rp/ale')
+    call dein#add('mileszs/ack.vim')
+
+    " the plugin are from other configuration - not usefull right now
+    "call dein#add(s:plugin_dir . '/Shougo/dein.vim')
+    "call dein#add('christoomey/vim-tmux-navigator')
+    "call dein#add('ryanoasis/vim-devicons')
+    "call dein#add('w0rp/ale')
+    "call dein#add('nelstrom/vim-visual-star-search')
+    "call dein#add('mileszs/ack.vim')
+    "call dein#add('Raimondi/delimitMate')
+    "call dein#add('mattn/emmet-vim')
+    "call dein#add('tpope/vim-commentary')
+    "call dein#add('tpope/vim-surround')
+    "call dein#add('tpope/vim-repeat')
+    "call dein#add('tpope/vim-fugitive')
+    "call dein#add('scrooloose/nerdtree')
+    "call dein#add('airblade/vim-gitgutter')
+    "call dein#add('vim-airline/vim-airline')
+    "call dein#add('vim-airline/vim-airline-themes')
+    "call dein#add('duff/vim-bufonly')
+    "call dein#add('gregsexton/MatchTag')
+    "call dein#add('sheerun/vim-polyglot')
+    "call dein#add('kristijanhusak/vim-hybrid-material')
+    "call dein#add('Shougo/deoplete.nvim')
+    "call dein#add('Shougo/neosnippet')
+    "call dein#add('honza/vim-snippets')
+    "call dein#add('dyng/ctrlsf.vim')
+    "call dein#add('ctrlpvim/ctrlp.vim')
+    "call dein#add('junegunn/goyo.vim')
+    " ===============================================================
+    if !has('nvim')
+        call dein#add('roxma/nvim-yarp')
+        call dein#add('roxma/vim-hug-neovim-rpc')
+    endif
 
     call dein#end()
     call dein#save_state()
 endif
 
-filetype plugin indent on                                                       "Enable plugins and indents by filetype
+filetype plugin indent on
+syntax enable
 
 let g:mapleader = ","                                                           "Change leader to a comma
 
@@ -314,9 +339,9 @@ let g:NERDTreeShowHidden = 1                                                    
 let g:NERDTreeIgnore=['\.git$', '\.sass-cache$', '\.vagrant', '\.idea']
 
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}                           "Snippets setup
-let g:neosnippet#snippets_directory = [
-            \ s:plugin_dir . '/honza/vim-snippets/snippets',
-            \ '~/.config/nvim/snippets']
+"let g:neosnippet#snippets_directory = [
+"            \ s:plugin_dir . '/honza/vim-snippets/snippets',
+"            \ '~/.config/nvim/snippets']
 
 let g:deoplete#enable_at_startup = 1                                            "Enable deoplete autocompletion
 let g:deoplete#file#enable_buffer_path = 1                                      "Autocomplete files relative to current buffer
