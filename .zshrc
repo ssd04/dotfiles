@@ -13,6 +13,6 @@ source ~/.bash_aliases
 bindkey '^t' autosuggest-execute
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 
-synclient TapButton1=1
+# synclient TapButton1=1
 
 [[ $TERM != "screen-256color" ]] && exec tmux -2
