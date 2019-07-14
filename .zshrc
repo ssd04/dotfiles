@@ -13,6 +13,9 @@ source ~/.bash_aliases
 bindkey '^t' autosuggest-execute
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 
+# Enable click by one touchpad touch
 synclient TapButton1=1
+
+HISTSIZE=90000
 
 [[ $TERM != "screen-256color" ]] && exec tmux -2
