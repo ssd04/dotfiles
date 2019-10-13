@@ -13,9 +13,13 @@ source ~/.bash_aliases
 bindkey '^t' autosuggest-execute
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 
+# enable vi mode
+bindkey -v
+
 # Enable click by one touchpad touch
 synclient TapButton1=1
 
 HISTSIZE=90000
+export GOPATH="$HOME/dev/go"
 
 [[ $TERM != "screen-256color" ]] && exec tmux -2

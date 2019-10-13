@@ -2,7 +2,6 @@
 alias cls='clear'
 alias g='google-chrome'
 alias pdf='xdg-open'
-alias vi='vim'
 alias ll='ls -la'
 alias l='ls -l'
 alias ls='ls --color=auto'
