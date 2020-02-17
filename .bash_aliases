@@ -11,6 +11,11 @@ alias pcmi='sudo pacman -S'
 alias pcms='sudo pacman -Ss'
 alias pcmu='sudo pacman -Sy'
 
+# Ubuntu related shortcuts
+alias aptu='sudo apt-get update'
+alias apts='sudo apt-cache search'
+alias apti='sudo apt-get install'
+
 # LXC related shortcuts
 alias lxc-ls='sudo lxc-ls --fancy'
 

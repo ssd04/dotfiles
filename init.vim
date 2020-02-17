@@ -10,7 +10,8 @@ if dein#load_state('~/.cache/dein')
     call dein#begin('~/.cache/dein')
 
     call dein#add('~/.cache/dein')
-    "call dein#add('Shougo/deoplete.nvim')
+    call dein#add('Shougo/deoplete.nvim')
+    call dein#add('Shougo/neosnippet')
     call dein#add('scrooloose/nerdtree')
     call dein#add('scrooloose/syntastic')
     call dein#add('vim-airline/vim-airline')
@@ -45,7 +46,6 @@ if dein#load_state('~/.cache/dein')
     "call dein#add('sheerun/vim-polyglot')
     "call dein#add('kristijanhusak/vim-hybrid-material')
     "call dein#add('Shougo/deoplete.nvim')
-    "call dein#add('Shougo/neosnippet')
     "call dein#add('honza/vim-snippets')
     "call dein#add('dyng/ctrlsf.vim')
     "call dein#add('ctrlpvim/ctrlp.vim')
@@ -130,7 +130,7 @@ augroup vimrc
 augroup END
 
 autocmd vimrc BufWritePre * :call s:StripTrailingWhitespaces()                  "Auto-remove trailing spaces
-autocmd vimrc InsertLeave * NeoSnippetClearMarkers                              "Remove unused markers for snippets
+"autocmd vimrc InsertLeave * NeoSnippetClearMarkers                              "Remove unused markers for snippets
 autocmd vimrc InsertEnter * :set nocul                                          "Remove cursorline highlight
 autocmd vimrc InsertLeave * :set cul                                            "Add cursorline highlight in normal mode
 autocmd vimrc FileType html,javascript,coffee,cucumber setlocal sw=2 sts=2 ts=2 "Set 2 indent for html
