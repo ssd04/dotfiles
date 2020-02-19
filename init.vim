@@ -21,6 +21,24 @@ if dein#load_state('~/.cache/dein')
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-fugitive')
+<<<<<<< HEAD
+=======
+    call dein#add('w0rp/ale')
+    call dein#add('mileszs/ack.vim')
+    call dein#add('yko/mojo.vim')
+    call dein#add('pprovost/vim-ps1')
+
+    " Pyhton
+    "call dein#add('zchee/deoplete-jedi')
+    call dein#add('klen/python-mode')
+
+    " Go
+    "call dein#add('fatih/vim-go')
+    "call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
+
+    " Terraform
+    call dein#add('hashivim/vim-terraform')
+>>>>>>> First commit work setup
 
     " the plugin are from other configuration - not usefull right now
     "call dein#add(s:plugin_dir . '/Shougo/dein.vim')
@@ -117,6 +135,7 @@ autocmd vimrc BufWritePre * :call s:StripTrailingWhitespaces()                  
 autocmd vimrc InsertEnter * :set nocul                                          "Remove cursorline highlight
 autocmd vimrc InsertLeave * :set cul                                            "Add cursorline highlight in normal mode
 autocmd vimrc FileType html,javascript,coffee,cucumber setlocal sw=2 sts=2 ts=2 "Set 2 indent for html
+autocmd vimrc FileType perl setlocal sw=2 sts=2 ts=2
 autocmd vimrc FileType php,javascript setlocal cc=80                            "Set right margin only for php and js
 autocmd vimrc VimEnter,BufNewFile,BufReadPost * call s:LoadLocalVimrc()         "Load per project vimrc (Used for custom test mappings, etc.)
 
@@ -124,6 +143,9 @@ autocmd vimrc VimEnter * set vb t_vb=
 
 autocmd vimrc FileType nerdtree syntax match hideBracketsInNerdTree
             \ "\]" contained conceal containedin=ALL
+
+" Jenkinsfile VIM syntax highlighting
+au BufNewFile,BufRead Jenkinsfile setf groovy
 
 " ================ Completion =======================
 
@@ -209,10 +231,58 @@ smap <expr><TAB> neosnippet#jumpable() ?
   
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}       "Snippets setup
 
+<<<<<<< HEAD
 " Deoplete config
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 let g:deoplete#enable_at_startup = 1              "Enable deoplete autocompletion
 let g:deoplete#file#enable_buffer_path = 0        "Autocomplete files relative to current buffer
+=======
+" Map for Escape key
+inoremap jk  <Esc>
+
+" Yank to the end of the line
+nnoremap Y y$
+
+" Copy to system clipboard
+vnoremap <C-c> "+y
+" Paste from system clipboard with Ctrl + v
+inoremap <C-v> <Esc>"+p
+nnoremap <Leader>p "0p
+vnoremap <Leader>p "0p
+
+" Move to the end of yanked text after yank and paste
+nnoremap p p`]
+vnoremap y y`]
+vnoremap p p`]
+
+" Move selected lines up and down
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Clear search highlight
+nnoremap <Leader><space> :noh<CR>
+
+" Toggle distraction free mode
+nnoremap <Leader>g :Goyo<CR>
+
+" Handle syntastic error window
+nnoremap <Leader>e :lopen<CR>
+nnoremap <Leader>q :lclose<CR>
+
+" Find current file in NERDTree
+"nnoremap <Leader>hf :NERDTreeFind<CR>
+" Open NERDTree
+"nnoremap <Leader>n :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
+
+" easier moving of code blocks
+" Try to go into visual mode (v), thenselect several lines of code here and
+" then press ``>`` several times.
+vnoremap < <gv
+" better indentation
+vnoremap > >gv
+" better indentation
+>>>>>>> First commit work setup
 
 set wildmode=list:full
 set wildignore=*.o,*.obj,*~             "stuff to ignore when tab completing
@@ -234,6 +304,7 @@ let g:go_version_warning = 0
 " Emmet configurations
 let g:user_emmet_leader_key='<C-L>'
 
+<<<<<<< HEAD
 " Airline bar config
 let g:airline_powerline_fonts = 1       "Enable powerline fonts
 let g:airline_theme = "hybrid"          "Set theme to powerline default theme
@@ -247,3 +318,37 @@ let g:airline#extensions#tabline#left_alt_sep = '│'         "Right separator f
 let g:NERDTreeChDirMode = 2             "Always change the root directory
 let g:NERDTreeMinimalUI = 1             "Disable help text and bookmark title
 let g:NERDTreeShowHidden = 1            "Show hidden files in NERDTree
+=======
+let g:neosnippet#disable_runtime_snippets = {'_' : 1}                           "Snippets setup
+"let g:neosnippet#snippets_directory = [
+"            \ s:plugin_dir . '/honza/vim-snippets/snippets',
+"            \ '~/.config/nvim/snippets']
+
+let g:deoplete#enable_at_startup = 1                                            "Enable deoplete autocompletion
+let g:deoplete#file#enable_buffer_path = 1                                      "Autocomplete files relative to current buffer
+
+let g:ackhighlight = 1                                                          "Highlight current search
+let g:ackprg = 'ag --vimgrep'                                                   "Use ag instead of ack for searching
+
+let g:delimitMate_expand_cr = 1                                                 "auto indent on enter
+
+let g:ale_linters = {'javascript': ['eslint']}                                  "Lint js with eslint
+let g:ale_lint_on_save = 1                                                      "Lint when saving a file
+let g:ale_sign_error = '✖'                                                      "Lint error sign
+let g:ale_sign_warning = '⚠'                                                    "Lint warning sign
+
+let g:goyo_width = 100                                                          "100 chars width
+let g:goyo_height = 100                                                         "100% height
+
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '                                "Set up spacing for sidebar icons
+
+let g:jsx_ext_required = 1                                                      "Force jsx extension for jsx filetype
+
+" Python
+let g:pymode_python = 'python3'
+
+" Terraform
+let g:terraform_align = 1
+let g:terraform_fold_sections = 1
+let g:terraform_fmt_on_save = 0
+>>>>>>> First commit work setup

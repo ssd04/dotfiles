@@ -53,9 +53,14 @@ NeoBundle 'itchyny/landscape.vim'
 "NeoBundle 'joonty/vdebug'
 "NeoBundle 'brookhong/dbgpavim'
 
+<<<<<<< HEAD
 " go
 "NeoBundle 'fatih/vim-go'
 "NeoBundle 'deoplete-plugins/deoplete-go', {'build': {'unix': 'make'}}
+=======
+NeoBundle 'jamessan/vim-gnupg'
+
+>>>>>>> First commit work setup
 
 " Rust
 NeoBundle 'rust-lang/rust.vim'

@@ -19,9 +19,22 @@ alias apti='sudo apt-get install'
 # LXC related shortcuts
 alias lxc-ls='sudo lxc-ls --fancy'
 
+<<<<<<< HEAD
 # Git shortcuts
 alias gits='git status'
 alias gitl='git log'
 alias gitc='git commit'
 alias gitk='git checkout'
 
+=======
+# Git
+alias gits='git status'
+alias gitl='git log'
+alias gitb='git branch'
+alias gitc='git commit -m'
+
+alias clip='tee >( xclip ) >( clipit ) >/dev/null'
+
+# Inschool related
+alias cdi='cd /home/darius/VismaWork/inschool/dev'
+>>>>>>> First commit work setup
