@@ -119,16 +119,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the vim keys
+        bindsym h resize shrink width 1 px or 1 ppt
+        bindsym j resize grow height 1 px or 1 ppt
+        bindsym k resize shrink height 1 px or 1 ppt
+        bindsym l resize grow width 1 px or 1 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -145,11 +145,9 @@ bar {
 	font pango:Inconsolata 11
 	position bottom
 	tray_output none
-	status_command ~/.config/i3/bumblebee-status/bumblebee-status -m disk:root cpu memory battery amixer date weather time -p root.path=/ datetime.format="%a, %b %d, %Y at %I:%M %p" -t  solarized-powerline
+	status_command ~/.config/i3/bumblebee-status/bumblebee-status -m disk:root cpu memory battery amixer date weather time -p root.path=/ -t solarized-powerline
+	#status_command ~/.config/i3/bumblebee-status/bumblebee-status -m disk:root cpu memory battery amixer date weather time -p root.path=/ datetime.format="%a, %b %d, %Y at %I:%M %p" -t  solarized-powerline
 }
-
-# Background wallpaper
-exec --no-startup-id feh --bg-scale ~/.config/i3/i3wallpaper.jpg
 
 # Disable border in order to fix conflict issues between feh and i3-gaps
 for_window [class=".*"] border pixel 0
@@ -158,7 +156,7 @@ hide_edge_borders both
 #exec /usr/bin/compton --config /home/ssd04/.compton.conf~.i3/config
 
 # Default inner and outer gaps
-gaps inner 10
+gaps inner 5
 gaps outer 5 
 
 # Pulse Audio controls
@@ -173,8 +171,16 @@ bindsym $mod+shift+z  gaps outer current minus 5
 bindsym $mod+x        gaps inner current plus 5
 bindsym $mod+shift+x  gaps inner current minus 5
 
+# Custom mappings
 bindsym $mod+b       exec firefox
 bindsym $mod+shift+b exec qutebrowser
+bindsym $mod+n       exec firefox news.ycombinator.com
 
 # Autostart config
+#
+# Background wallpaper
+exec --no-startup-id feh --bg-scale ~/.config/i3/i3wallpaper.jpg
+
 exec redshift
+
+exec --no-startup-id i3-msg 'workspace 1; exec xfce4-terminal; workspace 2; exec firefox'
