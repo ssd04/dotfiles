@@ -191,6 +191,9 @@ set noswapfile
 set nobackup
 set nowb
 
+" Terminal mappings
+tnoremap jk <C-\><C-n>
+
 set pastetoggle=<F2>
 
 " added later
