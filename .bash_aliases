@@ -19,17 +19,14 @@ alias apti='sudo apt-get install'
 # LXC related shortcuts
 alias lxc-ls='sudo lxc-ls --fancy'
 
-# Git shortcuts
-alias gits='git status'
-alias gitl='git log'
-alias gitc='git commit'
-alias gitk='git checkout'
-
 # Git
 alias gits='git status'
 alias gitl='git log'
 alias gitb='git branch'
 alias gitc='git commit -m'
+alias gitp='git push origin'
+alias gitk='git checkout'
+alias gitd='git diff'
 
 alias clip='tee >( xclip ) >( clipit ) >/dev/null'
 

@@ -59,6 +59,12 @@ set norunexec
 
 set noiec
 
+" Set relativenumber
+set relativenumber
+
+" View dotfiles by default
+set dotfiles
+
 " Selected color scheme
 
 colorscheme ph

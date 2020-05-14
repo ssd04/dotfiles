@@ -21,16 +21,15 @@ if dein#load_state('~/.cache/dein')
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-fugitive')
-<<<<<<< HEAD
-=======
     call dein#add('w0rp/ale')
     call dein#add('mileszs/ack.vim')
     call dein#add('yko/mojo.vim')
-    call dein#add('pprovost/vim-ps1')
+    call dein#add('vifm/vifm.vim')
 
     " Pyhton
     "call dein#add('zchee/deoplete-jedi')
     call dein#add('klen/python-mode')
+    call dein#add('python-mode/python-mode')
 
     " Go
     "call dein#add('fatih/vim-go')
@@ -38,7 +37,6 @@ if dein#load_state('~/.cache/dein')
 
     " Terraform
     call dein#add('hashivim/vim-terraform')
->>>>>>> First commit work setup
 
     " the plugin are from other configuration - not usefull right now
     "call dein#add(s:plugin_dir . '/Shougo/dein.vim')
@@ -104,9 +102,16 @@ set showcmd                             "Show incomplete cmds down the bottom
 set noshowmode                          "Hide showmode because of the powerline plugin
 set conceallevel=2 concealcursor=i      "neosnippets conceal marker
 
+" set text line width
+set textwidth=110
+set colorcolumn=-2
+
 " enable syntax and plugins
 syntax enable
 filetype plugin on
+if has("autocmd")
+  filetype plugin indent on
+endif
 "autocmd vimenter * NERDTree
 
 colorscheme hybrid_material
@@ -121,8 +126,12 @@ set numberwidth=4
 set autoindent
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
 set smartindent
 set nofoldenable
+
+" Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
+set splitbelow splitright
 
 " ================ Auto commands ======================
 
@@ -130,14 +139,13 @@ augroup vimrc
     autocmd!
 augroup END
 
-autocmd vimrc BufWritePre * :call s:StripTrailingWhitespaces()                  "Auto-remove trailing spaces
 "autocmd vimrc InsertLeave * NeoSnippetClearMarkers                              "Remove unused markers for snippets
 autocmd vimrc InsertEnter * :set nocul                                          "Remove cursorline highlight
 autocmd vimrc InsertLeave * :set cul                                            "Add cursorline highlight in normal mode
 autocmd vimrc FileType html,javascript,coffee,cucumber setlocal sw=2 sts=2 ts=2 "Set 2 indent for html
 autocmd vimrc FileType perl setlocal sw=2 sts=2 ts=2
 autocmd vimrc FileType php,javascript setlocal cc=80                            "Set right margin only for php and js
-autocmd vimrc VimEnter,BufNewFile,BufReadPost * call s:LoadLocalVimrc()         "Load per project vimrc (Used for custom test mappings, etc.)
+"autocmd vimrc VimEnter,BufNewFile,BufReadPost * call s:LoadLocalVimrc()         "Load per project vimrc (Used for custom test mappings, etc.)
 
 autocmd vimrc VimEnter * set vb t_vb=
 
@@ -185,7 +193,7 @@ cnoreabbrev T tabe
 set expandtab
 
 set smarttab
-" set softtabstop=4
+set softtabstop=4
 
 set ruler
 
@@ -231,12 +239,10 @@ smap <expr><TAB> neosnippet#jumpable() ?
   
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}       "Snippets setup
 
-<<<<<<< HEAD
 " Deoplete config
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 let g:deoplete#enable_at_startup = 1              "Enable deoplete autocompletion
 let g:deoplete#file#enable_buffer_path = 0        "Autocomplete files relative to current buffer
-=======
 " Map for Escape key
 inoremap jk  <Esc>
 
@@ -275,6 +281,9 @@ nnoremap <Leader>q :lclose<CR>
 "nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <C-n> :NERDTreeToggle<CR>
 
+" Hacky solution to current window fullscreen toggle
+nnoremap <C-w>z :tabnew %<CR>
+
 " easier moving of code blocks
 " Try to go into visual mode (v), thenselect several lines of code here and
 " then press ``>`` several times.
@@ -282,7 +291,6 @@ vnoremap < <gv
 " better indentation
 vnoremap > >gv
 " better indentation
->>>>>>> First commit work setup
 
 set wildmode=list:full
 set wildignore=*.o,*.obj,*~             "stuff to ignore when tab completing
@@ -304,7 +312,6 @@ let g:go_version_warning = 0
 " Emmet configurations
 let g:user_emmet_leader_key='<C-L>'
 
-<<<<<<< HEAD
 " Airline bar config
 let g:airline_powerline_fonts = 1       "Enable powerline fonts
 let g:airline_theme = "hybrid"          "Set theme to powerline default theme
@@ -318,7 +325,6 @@ let g:airline#extensions#tabline#left_alt_sep = '│'         "Right separator f
 let g:NERDTreeChDirMode = 2             "Always change the root directory
 let g:NERDTreeMinimalUI = 1             "Disable help text and bookmark title
 let g:NERDTreeShowHidden = 1            "Show hidden files in NERDTree
-=======
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}                           "Snippets setup
 "let g:neosnippet#snippets_directory = [
 "            \ s:plugin_dir . '/honza/vim-snippets/snippets',
@@ -351,4 +357,3 @@ let g:pymode_python = 'python3'
 let g:terraform_align = 1
 let g:terraform_fold_sections = 1
 let g:terraform_fmt_on_save = 0
->>>>>>> First commit work setup
