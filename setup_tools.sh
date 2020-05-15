@@ -104,11 +104,11 @@ install_package ()
     case $OS in
         "Ubuntu")
             echo "INFO: Installing package [ $1 ] ..."
-            apt-get install $1 -y 1> /dev/null || (echo "ERROR: Installation of package $1 failed." && exit 1)
+            sudo apt-get install $1 -y 1> /dev/null || (echo "ERROR: Installation of package $1 failed." && exit 1)
             ;;
         "Arch Linux")
             echo "INFO: Installing package [ $1 ] ..."
-            pacman -S $1 --noconfirm 1> /dev/null || echo "ERROR: Installation of package $1 failed." && exit 1
+            sudo pacman -S $1 --noconfirm 1> /dev/null || echo "ERROR: Installation of package $1 failed." && exit 1
             ;;
         *)
             echo "This script is not compatible with this OS."
@@ -151,7 +151,11 @@ basic_setup ()
 
 setup_vifm ()
 {
-    echo
+    echo "++++++ Setting up aliases ++++++"
+    remove_file .config/vifm/vifmrc
+    [ $? -ne 0 ] && return 1
+    ln -s ~/dotfiles/vifmrc ~/.config/vifm/vifmrc
+    echo "Config file setup successfully."
 }
 
 setup_zsh ()
@@ -189,6 +193,7 @@ setup_neovim ()
     remove_dir .config/nvim
     [ $? -ne 0 ] && return 1
     echo "Install required packages..."
+    mkdir ~/.config/nvim
     install_package neovim
     install_package python-neovim
     case $OS in
@@ -201,12 +206,12 @@ setup_neovim ()
         *)
             ;;
     esac
-    pip3 install neovim
-    pip install neovim
+    python3 -m pip install neovim
+    python2 -m pip install neovim
     echo "Packages installed successfully."
     echo "Setup neovim config file..."
     ln -s ~/dotfiles/init.vim ~/.config/nvim/init.vim
-    nvim -c 'call dein#install()'
+    nvim -c 'PlugInstall'
     echo "Config file setup successfully."
 }
 
@@ -237,7 +242,7 @@ while true ; do
             setup_zsh;
             shift ;;
         -v|--vifm)
-            setup_tmux;
+            setup_vifm;
             shift ;;
         -h|--help)
             print_help ; exit 1 ;;

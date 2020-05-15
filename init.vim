@@ -7,68 +7,56 @@ endif
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/deoplete.vim
 
-if dein#load_state('~/.cache/dein')
-    call dein#begin('~/.cache/dein')
+call plug#begin(stdpath('data') . '/plugged')
 
-    call dein#add('~/.cache/dein')
-    call dein#add('Shougo/deoplete.nvim')
-    call dein#add('Shougo/neosnippet')
-    call dein#add('scrooloose/nerdtree')
-    call dein#add('vim-airline/vim-airline')
-    call dein#add('vim-airline/vim-airline-themes')
-    call dein#add('kristijanhusak/vim-hybrid-material')
-    call dein#add('tpope/vim-commentary')
-    call dein#add('tpope/vim-surround')
-    call dein#add('tpope/vim-repeat')
-    call dein#add('tpope/vim-fugitive')
+Plug '~/.cache/dein'
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/neosnippet'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
 
-    " the plugin are from other configuration - not usefull right now
-    "call dein#add(s:plugin_dir . '/Shougo/dein.vim')
-    "call dein#add('christoomey/vim-tmux-navigator')
-    "call dein#add('ryanoasis/vim-devicons')
-    "call dein#add('w0rp/ale')
-    "call dein#add('nelstrom/vim-visual-star-search')
-    "call dein#add('mileszs/ack.vim')
-    "call dein#add('Raimondi/delimitMate')
-    "call dein#add('mattn/emmet-vim')
-    "call dein#add('tpope/vim-commentary')
-    "call dein#add('tpope/vim-surround')
-    "call dein#add('tpope/vim-repeat')
-    "call dein#add('tpope/vim-fugitive')
-    "call dein#add('scrooloose/nerdtree')
-    "call dein#add('airblade/vim-gitgutter')
-    "call dein#add('vim-airline/vim-airline')
-    "call dein#add('vim-airline/vim-airline-themes')
-    "call dein#add('duff/vim-bufonly')
-    "call dein#add('gregsexton/MatchTag')
-    "call dein#add('sheerun/vim-polyglot')
-    "call dein#add('kristijanhusak/vim-hybrid-material')
-    "call dein#add('Shougo/deoplete.nvim')
-    "call dein#add('honza/vim-snippets')
-    "call dein#add('dyng/ctrlsf.vim')
-    "call dein#add('ctrlpvim/ctrlp.vim')
-    "call dein#add('junegunn/goyo.vim')
-    " ===============================================================
-    " Go
-    call dein#add('fatih/vim-go')
-    call dein#add('Shougo/deoplete.nvim')
-    call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
+" the plugin are from other configuration - not usefull right now
+"Plug 'christoomey/vim-tmux-navigator'
+"Plug 'ryanoasis/vim-devicons'
+"Plug 'w0rp/ale'
+"Plug 'nelstrom/vim-visual-star-search'
+"Plug 'mileszs/ack.vim'
+"Plug 'Raimondi/delimitMate'
+"Plug 'mattn/emmet-vim'
+"Plug 'tpope/vim-commentary'
+"Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-repeat'
+"Plug 'tpope/vim-fugitive'
+"Plug 'scrooloose/nerdtree'
+"Plug 'airblade/vim-gitgutter'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+"Plug 'duff/vim-bufonly'
+"Plug 'gregsexton/MatchTag'
+"Plug 'sheerun/vim-polyglot'
+"Plug 'kristijanhusak/vim-hybrid-material'
+"Plug 'Shougo/deoplete.nvim'
+"Plug 'honza/vim-snippets'
+"Plug 'dyng/ctrlsf.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'junegunn/goyo.vim'
+" ===============================================================
+" Go
+"call dein#add('fatih/vim-go')
+"call dein#add('Shougo/deoplete.nvim')
+"call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
 
-    if !has('nvim')
-        call dein#add('roxma/nvim-yarp')
-        call dein#add('roxma/vim-hug-neovim-rpc')
-    endif
-
-    call dein#end()
-    call dein#save_state()
-endif
-
-if dein#check_install()
-    call dein#install()
-endif
+" Initialize plugin system
+call plug#end()
 
 " Autocommands
-autocmd VimEnter * call deoplete#custom#source('_',  'disabled_syntaxes', ['Comment', 'String'])
+"autocmd VimEnter * call deoplete#custom#source('_',  'disabled_syntaxes', ['Comment', 'String'])
 
 "- Basic setup -
 let g:mapleader = ","       "Change leader to a comma
@@ -112,13 +100,13 @@ augroup vimrc
     autocmd!
 augroup END
 
-autocmd vimrc BufWritePre * :call s:StripTrailingWhitespaces()                  "Auto-remove trailing spaces
+"autocmd vimrc BufWritePre * :call s:StripTrailingWhitespaces()                  "Auto-remove trailing spaces
 "autocmd vimrc InsertLeave * NeoSnippetClearMarkers                              "Remove unused markers for snippets
 autocmd vimrc InsertEnter * :set nocul                                          "Remove cursorline highlight
 autocmd vimrc InsertLeave * :set cul                                            "Add cursorline highlight in normal mode
 autocmd vimrc FileType html,javascript,coffee,cucumber setlocal sw=2 sts=2 ts=2 "Set 2 indent for html
 autocmd vimrc FileType php,javascript setlocal cc=80                            "Set right margin only for php and js
-autocmd vimrc VimEnter,BufNewFile,BufReadPost * call s:LoadLocalVimrc()         "Load per project vimrc (Used for custom test mappings, etc.)
+"autocmd vimrc VimEnter,BufNewFile,BufReadPost * call s:LoadLocalVimrc()         "Load per project vimrc (Used for custom test mappings, etc.)
 
 autocmd vimrc VimEnter * set vb t_vb=
 
