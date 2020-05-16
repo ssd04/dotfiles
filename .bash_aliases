@@ -22,8 +22,9 @@ alias lxc-ls='sudo lxc-ls --fancy'
 # Git shortcuts
 alias gits='git status'
 alias gitl='git log'
-alias gitc='git commit'
+alias gitc='git commit -m'
 alias gitk='git checkout'
+alias gitd='git diff'
 
 # SSH
 #alias scpfs="sshfs $1:/home/darius /home/darius/$1_mnt; vifm /home/darius/$1_mnt; fusermount -u /home/darius/$1_mnt"

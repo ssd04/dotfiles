@@ -1,10 +1,4 @@
-#!/bin/bash
-###########################################################################
-# Author: Darius Sarbu
-# Email: dariussuirab@gmail.com
-# Info: This script is used for setting up linux
-#       environment automatially.
-###########################################################################
+#!/usr/bin/env bash
 
 print_help ()
 {
@@ -44,26 +38,22 @@ setup_working_dir()
     echo "The working directory has been set to [ `echo ~` ]"
 }
 
+check_if_command_exists ()
+{
+    type $1 &> /dev/null || {
+      echo 'Please install git or update your path to include the git executable!'
+      exit 1
+    }
+}
+
 check_depends ()
 {
-    # check git command
-    type git &> /dev/null || {
-      echo 'Please install git or update your path to include the git executable!'
-      exit 1
-    }
-
-    # check pip command
-    type pip &> /dev/null || {
-      echo 'Please install git or update your path to include the git executable!'
-      exit 1
-    }
-
-    # check pip3 command
-    type pip3 &> /dev/null || {
-      echo 'Please install git or update your path to include the git executable!'
-      exit 1
-
-    }
+    ############################################
+    # $1 - array of strings
+    ############################################
+    for i in "$1"; do
+        check_if_command_exists $i
+    done
 }
 
 remove_file ()
@@ -219,14 +209,20 @@ setup_neovim ()
 get_os_type
 setup_working_dir
 
+dependencies=(
+    git
+    pip
+    pip3
+)
+
 # Get command line options
-TEMP=`getopt -o cbntzvh --long checks,basic-config,neovim,tmux,zsh,vifm,help -- "$@"`
+TEMP=`getopt -o acbntzvh --long all,checks,basic-config,neovim,tmux,zsh,vifm,help -- "$@"`
 eval set -- "$TEMP"
 
 while true ; do
     case $1 in
         -c|--checks)
-            check_depends;
+            check_depends "${dependencies[@]}";
             clone_repo;
             shift ;;
         -b|--basic-config)
@@ -242,6 +238,15 @@ while true ; do
             setup_zsh;
             shift ;;
         -v|--vifm)
+            setup_vifm;
+            shift ;;
+        -a|--all)
+            check_depends "${dependencies[@]}";
+            clone_repo;
+            basic_setup;
+            setup_neovim;
+            setup_tmux;
+            setup_zsh;
             setup_vifm;
             shift ;;
         -h|--help)
