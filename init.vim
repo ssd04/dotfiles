@@ -3,9 +3,16 @@
 if &compatible
     set nocompatible
 endif
-" Add the dein installation directory into runtimepath
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/deoplete.vim
+
+" install vim-plug if not already there
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    augroup install_vim_plug
+        autocmd!
+        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    augroup END
+endif
 
 call plug#begin(stdpath('data') . '/plugged')
 
@@ -47,10 +54,16 @@ Plug 'tpope/vim-fugitive'
 "Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'junegunn/goyo.vim'
 " ===============================================================
+
+" Python
+Plug 'davidhalter/jedi-vim'
+
 " Go
-"call dein#add('fatih/vim-go')
-"call dein#add('Shougo/deoplete.nvim')
-"call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
+"Plug 'fatih/vim-go'
+"Plug 'Shougo/deoplete.nvim'
+"Plug 'deoplete-plugins/deoplete-go', {'build': 'make'})
+
+call deoplete#enable()
 
 " Initialize plugin system
 call plug#end()
@@ -203,7 +216,7 @@ let g:neosnippet#disable_runtime_snippets = {'_' : 1}       "Snippets setup
 " Deoplete config
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 let g:deoplete#enable_at_startup = 1              "Enable deoplete autocompletion
-let g:deoplete#file#enable_buffer_path = 0        "Autocomplete files relative to current buffer
+"let g:deoplete#file#enable_buffer_path = 0        "Autocomplete files relative to current buffer
 
 set wildmode=list:full
 set wildignore=*.o,*.obj,*~             "stuff to ignore when tab completing
