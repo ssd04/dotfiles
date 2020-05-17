@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
-xrandr -q | grep ' connected' | head -n 1 | cut -d ' ' -f1 | xargs -I {} xrandr --output {} --brightness $1
+# Brightness level as percentage (ex. 0.7 or 1.2)
+brightness_level=$1
+
+xrandr -q | grep ' connected' | head -n 1 | cut -d ' ' -f1 | xargs -I {} xrandr --output {} --brightness ${brightness_level}
