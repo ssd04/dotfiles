@@ -8,7 +8,7 @@
 #   - F10 -> Show menubar
 ############################################################
 
-set $mod Mod4
+set $mod Mod1
 
 font pango: DejaVu 8
 
@@ -172,7 +172,7 @@ bindsym $mod+x        gaps inner current plus 5
 bindsym $mod+shift+x  gaps inner current minus 5
 
 # Custom mappings
-bindsym $mod+b       exec firefox
+bindsym $mod+b       exec brave-browser
 bindsym $mod+shift+b exec qutebrowser
 bindsym $mod+n       exec firefox news.ycombinator.com
 

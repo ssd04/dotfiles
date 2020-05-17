@@ -164,6 +164,35 @@ setup_zsh ()
     echo "Zsh setup successfully. Set default shell by: chsh -s /bin/bash"
 }
 
+setup_i3 ()
+{
+    echo "++++++ Setting up i3 ++++++"
+    echo "Install required packages..."
+    sudo add-apt-repository ppa:kgilmer/speed-ricer
+    sudo apt-get update
+    install_package i3_gaps
+    echo "Packages installed successfully."
+    echo "Setup i3 ..."
+    remove_file ~/.config/i3/config
+    ln -s ~/dotfiles/i3_config ~/.config/i3/config
+    ln -s ~/dotfiles/i3_scripts ~/.config/i3/scripts
+    echo "Setup status bar"
+    case $OS in
+        "Ubuntu")
+            install_package fonts-font-awesome
+            install_package fonts-powerline
+            ;;
+        "Arch Linux")
+            install_package awesome-terminal-fonts
+            install_package fonts-powerline
+            ;;
+        *)
+            ;;
+    esac
+    git clone git://github.com/tobi-wan-kenobi/bumblebee-status ~/..config/i3
+    echo "i3-gaps setup successfully."
+}
+
 setup_tmux ()
 {
     echo "++++++ Setting up tmux ++++++"
@@ -236,6 +265,9 @@ while true ; do
             shift ;;
         -z|--zsh)
             setup_zsh;
+            shift ;;
+        -i|--i3)
+            setup_i3;
             shift ;;
         -v|--vifm)
             setup_vifm;

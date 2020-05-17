@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+xrandr -q | grep ' connected' | head -n 1 | cut -d ' ' -f1 | xargs -I {} xrandr --output {} --brightness $1
