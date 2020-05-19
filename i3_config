@@ -182,6 +182,13 @@ bindsym --release XF86Paste exec --no-startup-id ~/.config/i3/scripts/smart_past
 bindsym $mod+w       exec --no-startup-id /home/darius/VismaWork/scripts/adm_pass.sh
 bindsym $mod+q       exec --no-startup-id /home/darius/VismaWork/scripts/adm_token.sh
 
+# Screenshoot setup
+# take a screenshot of a screen region and copy it to a clipboard
+bindsym --release Shift+Print exec ~/.config/i3/scripts/screen_shooter -s /home/$USER/Pictures
+
+# take a screenshot of a whole window and copy it to a clipboard
+bindsym --release Print exec ~/.config/i3/scripts/screen_shooter /home/darius/Pictures
+
 # Autostart config
 #
 # Background wallpaper
