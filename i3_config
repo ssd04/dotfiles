@@ -65,7 +65,7 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -176,11 +176,18 @@ bindsym $mod+b       exec brave-browser
 bindsym $mod+shift+b exec qutebrowser
 bindsym $mod+n       exec firefox news.ycombinator.com
 
+bindsym --release XF86Copy  exec --no-startup-id ~/.config/i3/scripts/smart-copy
+bindsym --release XF86Paste exec --no-startup-id ~/.config/i3/scripts/smart_paste
+
+bindsym $mod+w       exec --no-startup-id /home/darius/VismaWork/scripts/adm_pass.sh
+bindsym $mod+q       exec --no-startup-id /home/darius/VismaWork/scripts/adm_token.sh
+
 # Autostart config
 #
 # Background wallpaper
 exec --no-startup-id feh --bg-scale ~/.config/i3/i3wallpaper.jpg
 
-exec redshift
+exec --no-startup-id redshift
+exec --no-startup-id clipit
 
-exec --no-startup-id i3-msg 'workspace 1; exec xfce4-terminal; workspace 2; exec firefox'
+exec --no-startup-id i3-msg 'workspace 1; exec xfce4-terminal; workspace 2; exec brave-browser'

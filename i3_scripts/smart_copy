@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+#!/bin/sh
+# smart-copy
+
+win=$(xprop -id $(xdotool getactivewindow) | grep 'WM_CLASS(STRING)' | cut -d'"' -f2)
+
+case $win in
+    "xfce4-terminal") xdotool key ctrl+shift+c ;;
+    *) xdotool key ctrl+c ;;
+esac
