@@ -88,6 +88,10 @@ set nofoldenable
 set expandtab
 set smarttab
 
+" Window splitting setup
+set splitright
+set splitbelow
+
 " turn off swap files
 set noswapfile
 set nobackup
@@ -143,6 +147,14 @@ nnoremap <Leader>b oimport pdb; pdb.set_trace()<esc>
 nnoremap <Leader>B Oimport pdb; pdb.set_trace()<esc>
 "nnoremap <Leader>b obreakpoint()<esc>
 "nnoremap <Leader>B Obreakpoint()<esc>
+
+" Copy to system clipboard
+vnoremap <C-c> "+y
+" Paste from system clipboard with Ctrl + v
+inoremap <C-v> <Esc>"+p
+
+" Hacky solution to current window fullscreen toggle
+nnoremap <C-w>z :tabnew %<CR>
 
 " Abbreviations
 cnoreabbrev Wq wq

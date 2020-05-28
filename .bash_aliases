@@ -31,3 +31,6 @@ alias gitd='git diff'
 
 # Security updates
 alias secu="sudo apt-get -s dist-upgrade | grep \"^Inst\" | grep -i securi | awk -F \" \" {'print $2'} | xargs sudo apt-get install"
+
+# Work related
+alias cdi="cd ~/VismaWork/inschool"
