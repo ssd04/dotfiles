@@ -29,6 +29,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
+Plug 'w0rp/ale'
 
 " Python
 Plug 'davidhalter/jedi-vim'
@@ -68,6 +69,7 @@ set pastetoggle=<F2>
 set ruler
 set undolevels=100
 set laststatus=2                        " Always show the status line
+set nohlsearch                          " Disable search highlight
 
 " Colors
 colorscheme hybrid_material
@@ -156,6 +158,10 @@ inoremap <C-v> <Esc>"+p
 " Hacky solution to current window fullscreen toggle
 nnoremap <C-w>z :tabnew %<CR>
 
+" Scrolling
+nnoremap J <C-d>    " scroll down
+nnoremap K <C-u>    " scroll up
+
 " Abbreviations
 cnoreabbrev Wq wq
 cnoreabbrev WQ wq
@@ -219,3 +225,14 @@ let g:airline#extensions#tabline#left_alt_sep = '│'         " Right separator 
 let g:NERDTreeChDirMode = 2             " Always change the root directory
 let g:NERDTreeMinimalUI = 1             " Disable help text and bookmark title
 let g:NERDTreeShowHidden = 1            " Show hidden files in NERDTree
+
+" Jedi (autocompletion library) config 
+" check doc :h jedi-vim
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_stubs_command = "<leader>s"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = ""
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = ""
+let g:jedi#rename_command = "<leader>r"
