@@ -34,3 +34,4 @@ alias secu="sudo apt-get -s dist-upgrade | grep \"^Inst\" | grep -i securi | awk
 
 # Work related
 alias cdi="cd ~/VismaWork/inschool"
+alias myip="curl ifconfig.me"
