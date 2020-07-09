@@ -35,3 +35,4 @@ alias sec="sudo apt-get update && ( sudo apt-get -s dist-upgrade | grep \"^Inst\
 # Work related
 alias cdi="cd ~/VismaWork/inschool"
 alias myip="curl ifconfig.me"
+alias vpn="/opt/cisco/anyconnect/bin/vpn"
