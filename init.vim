@@ -20,19 +20,31 @@ call plug#begin(stdpath('data') . '/plugged')
 
 Plug '~/.cache/dein'
 Plug 'Shougo/deoplete.nvim'
+Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'Shougo/neosnippet'
+
 Plug 'scrooloose/nerdtree'
+Plug 'xuyuanp/nerdtree-git-plugin'
+"Plug 'ryanoasis/nerd-fonts'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'cocopon/iceberg.vim'
+Plug 'majutsushi/tagbar'
+Plug 'junegunn/fzf'
+
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'w0rp/ale'
 
+Plug 'hashivim/vim-terraform'
+
 " Python
 Plug 'davidhalter/jedi-vim'
+"Plug 'psf/black'
 
 " Go
 "Plug 'fatih/vim-go'
@@ -41,6 +53,7 @@ Plug 'davidhalter/jedi-vim'
 
 " Web
 "Plug 'mattn/emmet-vim'
+Plug 'ryanoasis/vim-devicons'
 
 " Initialize plugin system
 call plug#end()
@@ -50,6 +63,7 @@ call plug#end()
 " enable syntax and plugins
 syntax enable
 filetype plugin on
+set encoding=UTF-8
 "autocmd vimenter * NERDTree
 
 let g:mapleader = ","                   " Change leader to a comma
@@ -203,6 +217,10 @@ let g:neosnippet#disable_runtime_snippets = {'_' : 1}       "Snippets setup
 " Deoplete config
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 let g:deoplete#enable_at_startup = 1              "Enable deoplete autocompletion
+" Use ALE and also some plugin 'foobar' as completion sources for all code.
+"call deoplete#custom#option('sources', {
+"\ '_': ['ale'],
+"\})
 "let g:deoplete#file#enable_buffer_path = 0        "Autocomplete files relative to current buffer
 
 " Go config
@@ -223,8 +241,9 @@ let g:airline#extensions#tabline#left_alt_sep = '│'         " Right separator 
 
 " NerdTree config
 let g:NERDTreeChDirMode = 2             " Always change the root directory
-let g:NERDTreeMinimalUI = 1             " Disable help text and bookmark title
+"let g:NERDTreeMinimalUI = 1             " Disable help text and bookmark title
 let g:NERDTreeShowHidden = 1            " Show hidden files in NERDTree
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
 
 " Jedi (autocompletion library) config 
 " check doc :h jedi-vim
