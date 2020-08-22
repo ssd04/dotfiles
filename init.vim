@@ -25,6 +25,8 @@ Plug 'Shougo/neosnippet'
 
 Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
 "Plug 'ryanoasis/nerd-fonts'
 
 Plug 'vim-airline/vim-airline'
@@ -37,10 +39,13 @@ Plug 'junegunn/fzf'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-fugitive'
 Plug 'w0rp/ale'
 
 Plug 'hashivim/vim-terraform'
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'apzelos/blamer.nvim'
 
 " Python
 Plug 'davidhalter/jedi-vim'
@@ -53,7 +58,6 @@ Plug 'davidhalter/jedi-vim'
 
 " Web
 "Plug 'mattn/emmet-vim'
-Plug 'ryanoasis/vim-devicons'
 
 " Initialize plugin system
 call plug#end()
@@ -137,6 +141,14 @@ autocmd vimrc VimEnter * set vb t_vb=
 
 autocmd vimrc FileType nerdtree syntax match hideBracketsInNerdTree
             \ "\]" contained conceal containedin=ALL
+autocmd FileType nerdtree setlocal nolist
+
+autocmd filetype nerdtree highlight haskell_icon ctermbg=none ctermfg=Red guifg=#ffa500
+autocmd filetype nerdtree highlight html_icon ctermbg=none ctermfg=Red guifg=#ffa500
+autocmd filetype nerdtree highlight go_icon ctermbg=none ctermfg=Red guifg=#ffa500
+autocmd filetype nerdtree highlight python_icon ctermbg=none ctermfg=Blue guifg=#ffa500
+
+autocmd filetype nerdtree syn match haskell_icon ## containedin=NERDTreeFlags
 
 " ################### Mappings #####################
 inoremap jk <esc>
@@ -243,7 +255,18 @@ let g:airline#extensions#tabline#left_alt_sep = '│'         " Right separator 
 let g:NERDTreeChDirMode = 2             " Always change the root directory
 "let g:NERDTreeMinimalUI = 1             " Disable help text and bookmark title
 let g:NERDTreeShowHidden = 1            " Show hidden files in NERDTree
+let g:NERDTreeLimitedSyntax = 0 " limit syntax for the most popular extensions
 let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
+let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
+let g:DevIconsEnableFolderExtensionPatternMatching = 1
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
+
+let g:WebDevIconsUnicodeDecorateFileNodes = 0
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
 
 " Jedi (autocompletion library) config 
 " check doc :h jedi-vim
