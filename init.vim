@@ -49,7 +49,7 @@ Plug 'apzelos/blamer.nvim'
 
 " Python
 Plug 'davidhalter/jedi-vim'
-"Plug 'psf/black'
+Plug 'psf/black'
 
 " Go
 "Plug 'fatih/vim-go'
@@ -149,6 +149,8 @@ autocmd filetype nerdtree highlight go_icon ctermbg=none ctermfg=Red guifg=#ffa5
 autocmd filetype nerdtree highlight python_icon ctermbg=none ctermfg=Blue guifg=#ffa500
 
 autocmd filetype nerdtree syn match haskell_icon ## containedin=NERDTreeFlags
+
+autocmd BufWritePre *.py execute ':Black'
 
 " ################### Mappings #####################
 inoremap jk <esc>
