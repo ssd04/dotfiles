@@ -30,7 +30,7 @@ alias gitd='git diff'
 #alias scpfs="sshfs $1:/home/darius /home/darius/$1_mnt; vifm /home/darius/$1_mnt; fusermount -u /home/darius/$1_mnt"
 
 # Security updates
-alias sec="sudo apt-get update && ( sudo apt-get -s dist-upgrade | grep \"^Inst\" | grep -i securi | awk -F \" \" {'print $2'} | xargs sudo apt-get install )"
+alias sec='sudo apt-get update && { sudo apt-get -s dist-upgrade | grep "^Inst" | grep -i securi | cut -d " " -f 2 | xargs sudo apt-get install }'
 
 # Work related
 alias cdi="cd ~/VismaWork/inschool"
