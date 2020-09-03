@@ -198,6 +198,7 @@ cnoreabbrev Q q
 cnoreabbrev wrap set wrap
 cnoreabbrev nowrap set nowrap
 cnoreabbrev git Git
+cnoreabbrev black Black
 
 " ################### Completion #####################
 set wildmode=list:full
@@ -280,3 +281,6 @@ let g:jedi#documentation_command = ""
 let g:jedi#usages_command = "<leader>n"
 let g:jedi#completions_command = ""
 let g:jedi#rename_command = "<leader>r"
+
+" Ale config
+let g:ale_python_flake8_options = '--ignore=E501'
