@@ -152,6 +152,8 @@ autocmd filetype nerdtree syn match haskell_icon ## containedin=NERDTreeFlags
 
 autocmd BufWritePre *.py execute ':Black'
 
+autocmd BufWritePre *.tf execute ':TerraformFmt'
+
 " ################### Mappings #####################
 inoremap jk <esc>
 inoremap kj <esc>
@@ -185,6 +187,8 @@ inoremap <C-v> <Esc>"+p
 
 " Hacky solution to current window fullscreen toggle
 nnoremap <C-w>z :tabnew %<CR>
+
+nnoremap <Leader>t :!pytest
 
 " Scrolling
 nnoremap J <C-d>    " scroll down
