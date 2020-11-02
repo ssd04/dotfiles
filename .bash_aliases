@@ -25,6 +25,7 @@ alias gitl='git log'
 alias gitc='git commit -m'
 alias gitk='git checkout'
 alias gitd='git diff'
+alias gitb='git branch'
 
 # SSH
 #alias scpfs="sshfs $1:/home/darius /home/darius/$1_mnt; vifm /home/darius/$1_mnt; fusermount -u /home/darius/$1_mnt"
@@ -34,5 +35,6 @@ alias sec='sudo apt-get update && { sudo apt-get -s dist-upgrade | grep "^Inst" 
 
 # Work related
 alias cdi="cd ~/VismaWork/inschool"
+alias cdp="cd ~/VismaWork/pads"
 alias myip="curl ifconfig.me"
 alias vpn="/opt/cisco/anyconnect/bin/vpn"

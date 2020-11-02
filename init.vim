@@ -203,6 +203,7 @@ cnoreabbrev wrap set wrap
 cnoreabbrev nowrap set nowrap
 cnoreabbrev git Git
 cnoreabbrev black Black
+cnoreabbrev co Co
 
 " ################### Completion #####################
 set wildmode=list:full
