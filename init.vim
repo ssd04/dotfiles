@@ -18,10 +18,10 @@ endif
 
 call plug#begin(stdpath('data') . '/plugged')
 
-Plug '~/.cache/dein'
-Plug 'Shougo/deoplete.nvim'
-Plug 'deoplete-plugins/deoplete-jedi'
-Plug 'Shougo/neosnippet'
+" Plug '~/.cache/dein'
+" Plug 'Shougo/deoplete.nvim'
+" Plug 'deoplete-plugins/deoplete-jedi'
+" Plug 'Shougo/neosnippet'
 
 Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
@@ -39,7 +39,9 @@ Plug 'junegunn/fzf'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'hashivim/vim-terraform'
 
@@ -48,8 +50,18 @@ Plug 'tpope/vim-fugitive'
 Plug 'apzelos/blamer.nvim'
 
 " Python
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
 Plug 'psf/black'
+
+" Latex
+Plug 'lervag/vimtex'
+
+Plug 'junegunn/limelight.vim'
+
+let g:vimtex_view_general_viewer = 'zathura'
+let g:vimtex_view_general_options
+    \ = '-reuse-instance -forward-search @tex @line @pdf'
+let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 
 " Go
 "Plug 'fatih/vim-go'
@@ -159,7 +171,12 @@ inoremap jk <esc>
 inoremap kj <esc>
 inoremap kl <esc>
 "nnoremap ; <shift>:
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :call ToggleNERDTree()<CR>
+
+function! ToggleNERDTree()
+  NERDTreeToggle
+  silent NERDTreeMirror
+endfunction
 
 " easier moving between tabs
 nnoremap <Leader>n <esc>:tabprevious<CR>
@@ -203,7 +220,12 @@ cnoreabbrev wrap set wrap
 cnoreabbrev nowrap set nowrap
 cnoreabbrev git Git
 cnoreabbrev black Black
-cnoreabbrev co Co
+cnoreabbrev co Commentary
+
+" Remap for rename current word
+nmap <leader>r <Plug>(coc-rename)
+nmap gr <Plug>(coc-references)
+nmap <leader>gi <Plug>(coc-implementation)
 
 " ################### Completion #####################
 set wildmode=list:full
@@ -222,15 +244,18 @@ set wildignore+=*.png,*.jpg,*.gif
 " ################## Plugins related setup #####################
 
 " Expand snippets on tab if snippets exists, otherwise do autocompletion
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\ : pumvisible() ? "\<C-n>" : "\<TAB>"
-" If popup window is visible do autocompletion from back
-imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" Fix for jumping over placeholders for neosnippet
-smap <expr><TAB> neosnippet#jumpable() ?
-\ "\<Plug>(neosnippet_jump)"
-\: "\<TAB>"
+" imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+" \ "\<Plug>(neosnippet_expand_or_jump)"
+" \ : pumvisible() ? "\<C-n>" : "\<TAB>"
+" " If popup window is visible do autocompletion from back
+" imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" " Fix for jumping over placeholders for neosnippet
+" smap <expr><TAB> neosnippet#jumpable() ?
+" \ "\<Plug>(neosnippet_jump)"
+" \: "\<TAB>"
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
   
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}       "Snippets setup
 
