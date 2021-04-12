@@ -33,3 +33,30 @@ dev()
     tmux select-pane -U ;
     nvim .
 }
+
+###################################
+# WebCam
+###################################
+
+camera()
+{   
+    : '
+    View Webcam in vlc
+    '
+
+    vlc v4l2:// :input-slave=alsa:// :v4l-vdev="/dev/video0"
+}
+
+###################################
+# Phone
+###################################
+
+phone()
+{
+    : '
+    Mount Android Phone.
+    jmtpfs has to be installed due to incompatibility between MTP and regular USB
+    '
+
+    jmtpfs /mnt/phone
+}
