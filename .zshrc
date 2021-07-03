@@ -23,4 +23,9 @@ synclient TapButton1=1
 HISTSIZE=90000
 export GOPATH="$HOME/dev/go"
 
+# Latex setup
+export MANPATH="$MANPATH:/usr/local/texlive/2020/texmf-dist/doc/man"
+export INFOPATH="$INFOPATH:/usr/local/texlive/2020/texmf-dist/doc/info"
+export PATH=/usr/local/texlive/2020/bin/x86_64-linux:$PATH
+
 [[ $TERM != "screen-256color" ]] && exec tmux -2
