@@ -53,6 +53,10 @@ Plug 'apzelos/blamer.nvim'
 "Plug 'davidhalter/jedi-vim'
 Plug 'psf/black'
 
+Plug 'dpelle/vim-LanguageTool'
+
+let g:languagetool_jar='~/LanguageTool/*/languagetool-commandline.jar'
+
 " Latex
 Plug 'lervag/vimtex'
 
@@ -62,9 +66,28 @@ let g:vimtex_view_general_viewer = 'zathura'
 let g:vimtex_view_general_options
     \ = '-reuse-instance -forward-search @tex @line @pdf'
 let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+let g:vimtex_compiler_latexmk = { 
+        \ 'executable' : 'latexmk',
+        \ 'options' : [ 
+        \   '-xelatex',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \ ],
+        \}
+let g:vimtex_compiler_latexmk_engines = {
+    \ '_'                : '-xelatex',
+    \ 'pdflatex'         : '-pdf',
+    \ 'dvipdfex'         : '-pdfdvi',
+    \ 'lualatex'         : '-lualatex',
+    \ 'xelatex'          : '-xelatex',
+    \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
+    \ 'context (luatex)' : '-pdf -pdflatex=context',
+    \ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
+    \}
 
 " Go
-"Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 "Plug 'Shougo/deoplete.nvim'
 "Plug 'deoplete-plugins/deoplete-go', {'build': 'make'})
 
@@ -260,8 +283,8 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}       "Snippets setup
 
 " Deoplete config
-let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-let g:deoplete#enable_at_startup = 1              "Enable deoplete autocompletion
+"let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+"let g:deoplete#enable_at_startup = 1              "Enable deoplete autocompletion
 " Use ALE and also some plugin 'foobar' as completion sources for all code.
 "call deoplete#custom#option('sources', {
 "\ '_': ['ale'],
@@ -271,6 +294,7 @@ let g:deoplete#enable_at_startup = 1              "Enable deoplete autocompletio
 " Go config
 let g:go_info_mode='guru'
 let g:go_version_warning = 0
+let g:go_gopls_enabled = 0
 
 " Emmet configurations
 let g:user_emmet_leader_key='<C-L>'
