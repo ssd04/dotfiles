@@ -6,9 +6,13 @@
 # xfce4-terminal menu shortcuts
 #   - F11 -> toggle fullscreen mode
 #   - F10 -> Show menubar
+#
+# ( parensleft
+# [ bracketleft
+# { braceleft
 ############################################################
 
-set $mod Mod4
+set $mod Mod1
 
 font pango: DejaVu 8
 
@@ -17,7 +21,7 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec st
 #bindsym $mod+Return exec urxvt
 
 # kill focused window
@@ -65,7 +69,7 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -160,8 +164,8 @@ gaps inner 5
 gaps outer 5 
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%   # increase sound volume
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%   # decrease sound volume
+bindsym $mod+bracketright exec pactl set-sink-volume 0 +5%   # increase sound volume
+bindsym $mod+bracketleft exec pactl set-sink-volume 0 -5%   # decrease sound volume
 bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle         # mute sound
 
 # Window resizing
@@ -172,15 +176,55 @@ bindsym $mod+x        gaps inner current plus 5
 bindsym $mod+shift+x  gaps inner current minus 5
 
 # Custom mappings
-bindsym $mod+b       exec firefox
+bindsym $mod+b       exec brave-browser
 bindsym $mod+shift+b exec qutebrowser
 bindsym $mod+n       exec firefox news.ycombinator.com
+
+bindsym --release XF86Copy  exec --no-startup-id ~/.config/i3/scripts/smart-copy
+bindsym --release XF86Paste exec --no-startup-id ~/.config/i3/scripts/smart_paste
+
+bindsym $mod+w       exec --no-startup-id /home/darius/VismaWork/scripts/pass.sh
+bindsym $mod+q       exec --no-startup-id /home/darius/VismaWork/scripts/token.sh
+
+# Screenshoot setup
+# take a screenshot of a screen region and copy it to a clipboard
+bindsym --release Shift+Print exec ~/.config/i3/scripts/screen_shooter -s /home/$USER/Pictures
+
+# take a screenshot of a whole window and copy it to a clipboard
+bindsym --release Print exec ~/.config/i3/scripts/screen_shooter /home/darius/Pictures
 
 # Autostart config
 #
 # Background wallpaper
 exec --no-startup-id feh --bg-scale ~/.config/i3/i3wallpaper.jpg
 
-exec redshift
+exec --no-startup-id redshift
+exec --no-startup-id clipit
 
-exec --no-startup-id i3-msg 'workspace 1; exec xfce4-terminal; workspace 2; exec firefox'
+# Monitors setup
+# eDP-1 -> laptop monitor
+# DP-3  -> external monitor
+#
+# Set external monitor as primary
+exec --no-startup-id xrandr --output DP-3 --primary
+
+workspace 1 output DP-3
+workspace 2 output DP-3
+workspace 3 output DP-3
+workspace 4 output DP-3
+workspace 5 output eDP-1
+
+# Workaround for slack calls floating window
+for_window [class="Slack" floating] move container to workspace current
+
+# Assign Workspaces:
+assign [class="Brave"] 2
+assign [class="Google"] 3
+assign [class="st"] 1
+assign [class="xfce4-terminal"] 5
+assign [class="Slack"] 5
+
+exec --no-startup-id i3-msg 'workspace 1; exec st'
+exec --no-startup-id i3-msg 'workspace 2; exec brave-browser'
+exec --no-startup-id i3-msg 'workspace 3; exec google-chrome'
+exec --no-startup-id i3-msg 'workspace 5; exec xfce4-terminal; exec slack'

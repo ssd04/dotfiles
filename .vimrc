@@ -96,6 +96,9 @@ colorscheme landscape
 colorscheme hybrid_material
 set laststatus=2
 
+set splitbelow
+set splitright
+
 let mapleader=','
 
 set number

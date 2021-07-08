@@ -1,10 +1,4 @@
-#!/bin/bash
-###########################################################################
-# Author: Darius Sarbu
-# Email: dariussuirab@gmail.com
-# Info: This script is used for setting up linux
-#       environment automatially.
-###########################################################################
+#!/usr/bin/env bash
 
 print_help ()
 {
@@ -44,26 +38,22 @@ setup_working_dir()
     echo "The working directory has been set to [ `echo ~` ]"
 }
 
+check_if_command_exists ()
+{
+    type $1 &> /dev/null || {
+      echo 'Please install git or update your path to include the git executable!'
+      exit 1
+    }
+}
+
 check_depends ()
 {
-    # check git command
-    type git &> /dev/null || {
-      echo 'Please install git or update your path to include the git executable!'
-      exit 1
-    }
-
-    # check pip command
-    type pip &> /dev/null || {
-      echo 'Please install git or update your path to include the git executable!'
-      exit 1
-    }
-
-    # check pip3 command
-    type pip3 &> /dev/null || {
-      echo 'Please install git or update your path to include the git executable!'
-      exit 1
-
-    }
+    ############################################
+    # $1 - array of strings
+    ############################################
+    for i in "$1"; do
+        check_if_command_exists $i
+    done
 }
 
 remove_file ()
@@ -104,11 +94,11 @@ install_package ()
     case $OS in
         "Ubuntu")
             echo "INFO: Installing package [ $1 ] ..."
-            apt-get install $1 -y 1> /dev/null || (echo "ERROR: Installation of package $1 failed." && exit 1)
+            sudo apt-get install $1 -y 1> /dev/null || (echo "ERROR: Installation of package $1 failed." && exit 1)
             ;;
         "Arch Linux")
             echo "INFO: Installing package [ $1 ] ..."
-            pacman -S $1 --noconfirm 1> /dev/null || echo "ERROR: Installation of package $1 failed." && exit 1
+            sudo pacman -S $1 --noconfirm 1> /dev/null || echo "ERROR: Installation of package $1 failed." && exit 1
             ;;
         *)
             echo "This script is not compatible with this OS."
@@ -151,7 +141,11 @@ basic_setup ()
 
 setup_vifm ()
 {
-    echo
+    echo "++++++ Setting up aliases ++++++"
+    remove_file .config/vifm/vifmrc
+    [ $? -ne 0 ] && return 1
+    ln -s ~/dotfiles/vifmrc ~/.config/vifm/vifmrc
+    echo "Config file setup successfully."
 }
 
 setup_zsh ()
@@ -168,6 +162,35 @@ setup_zsh ()
     git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
     git clone git://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
     echo "Zsh setup successfully. Set default shell by: chsh -s /bin/bash"
+}
+
+setup_i3 ()
+{
+    echo "++++++ Setting up i3 ++++++"
+    echo "Install required packages..."
+    sudo add-apt-repository ppa:kgilmer/speed-ricer
+    sudo apt-get update
+    install_package i3_gaps
+    echo "Packages installed successfully."
+    echo "Setup i3 ..."
+    remove_file ~/.config/i3/config
+    ln -s ~/dotfiles/i3_config ~/.config/i3/config
+    ln -s ~/dotfiles/i3_scripts ~/.config/i3/scripts
+    echo "Setup status bar"
+    case $OS in
+        "Ubuntu")
+            install_package fonts-font-awesome
+            install_package fonts-powerline
+            ;;
+        "Arch Linux")
+            install_package awesome-terminal-fonts
+            install_package fonts-powerline
+            ;;
+        *)
+            ;;
+    esac
+    git clone git://github.com/tobi-wan-kenobi/bumblebee-status ~/..config/i3
+    echo "i3-gaps setup successfully."
 }
 
 setup_tmux ()
@@ -189,6 +212,7 @@ setup_neovim ()
     remove_dir .config/nvim
     [ $? -ne 0 ] && return 1
     echo "Install required packages..."
+    mkdir ~/.config/nvim
     install_package neovim
     install_package python-neovim
     case $OS in
@@ -201,12 +225,12 @@ setup_neovim ()
         *)
             ;;
     esac
-    pip3 install neovim
-    pip install neovim
+    python3 -m pip install neovim
+    python2 -m pip install neovim
     echo "Packages installed successfully."
     echo "Setup neovim config file..."
     ln -s ~/dotfiles/init.vim ~/.config/nvim/init.vim
-    nvim -c 'call dein#install()'
+    nvim -c 'PlugInstall'
     echo "Config file setup successfully."
 }
 
@@ -214,14 +238,20 @@ setup_neovim ()
 get_os_type
 setup_working_dir
 
+dependencies=(
+    git
+    pip
+    pip3
+)
+
 # Get command line options
-TEMP=`getopt -o cbntzvh --long checks,basic-config,neovim,tmux,zsh,vifm,help -- "$@"`
+TEMP=`getopt -o acbntzvh --long all,checks,basic-config,neovim,tmux,zsh,vifm,help -- "$@"`
 eval set -- "$TEMP"
 
 while true ; do
     case $1 in
         -c|--checks)
-            check_depends;
+            check_depends "${dependencies[@]}";
             clone_repo;
             shift ;;
         -b|--basic-config)
@@ -236,8 +266,20 @@ while true ; do
         -z|--zsh)
             setup_zsh;
             shift ;;
+        -i|--i3)
+            setup_i3;
+            shift ;;
         -v|--vifm)
+            setup_vifm;
+            shift ;;
+        -a|--all)
+            check_depends "${dependencies[@]}";
+            clone_repo;
+            basic_setup;
+            setup_neovim;
             setup_tmux;
+            setup_zsh;
+            setup_vifm;
             shift ;;
         -h|--help)
             print_help ; exit 1 ;;

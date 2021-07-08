@@ -3,182 +3,207 @@
 if &compatible
     set nocompatible
 endif
-" Add the dein installation directory into runtimepath
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/deoplete.vim
 
-if dein#load_state('~/.cache/dein')
-    call dein#begin('~/.cache/dein')
-
-    call dein#add('~/.cache/dein')
-    call dein#add('Shougo/deoplete.nvim')
-    call dein#add('Shougo/neosnippet')
-    call dein#add('scrooloose/nerdtree')
-    call dein#add('vim-airline/vim-airline')
-    call dein#add('vim-airline/vim-airline-themes')
-    call dein#add('kristijanhusak/vim-hybrid-material')
-    call dein#add('tpope/vim-commentary')
-    call dein#add('tpope/vim-surround')
-    call dein#add('tpope/vim-repeat')
-    call dein#add('tpope/vim-fugitive')
-
-    " the plugin are from other configuration - not usefull right now
-    "call dein#add(s:plugin_dir . '/Shougo/dein.vim')
-    "call dein#add('christoomey/vim-tmux-navigator')
-    "call dein#add('ryanoasis/vim-devicons')
-    "call dein#add('w0rp/ale')
-    "call dein#add('nelstrom/vim-visual-star-search')
-    "call dein#add('mileszs/ack.vim')
-    "call dein#add('Raimondi/delimitMate')
-    "call dein#add('mattn/emmet-vim')
-    "call dein#add('tpope/vim-commentary')
-    "call dein#add('tpope/vim-surround')
-    "call dein#add('tpope/vim-repeat')
-    "call dein#add('tpope/vim-fugitive')
-    "call dein#add('scrooloose/nerdtree')
-    "call dein#add('airblade/vim-gitgutter')
-    "call dein#add('vim-airline/vim-airline')
-    "call dein#add('vim-airline/vim-airline-themes')
-    "call dein#add('duff/vim-bufonly')
-    "call dein#add('gregsexton/MatchTag')
-    "call dein#add('sheerun/vim-polyglot')
-    "call dein#add('kristijanhusak/vim-hybrid-material')
-    "call dein#add('Shougo/deoplete.nvim')
-    "call dein#add('honza/vim-snippets')
-    "call dein#add('dyng/ctrlsf.vim')
-    "call dein#add('ctrlpvim/ctrlp.vim')
-    "call dein#add('junegunn/goyo.vim')
-    " ===============================================================
-    " Go
-    call dein#add('fatih/vim-go')
-    call dein#add('Shougo/deoplete.nvim')
-    call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
-
-    if !has('nvim')
-        call dein#add('roxma/nvim-yarp')
-        call dein#add('roxma/vim-hug-neovim-rpc')
-    endif
-
-    call dein#end()
-    call dein#save_state()
+" ################### Plug setup #####################
+"
+" install vim-plug if not already there
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    augroup install_vim_plug
+        autocmd!
+        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    augroup END
 endif
 
-if dein#check_install()
-    call dein#install()
-endif
+call plug#begin(stdpath('data') . '/plugged')
 
-" Autocommands
-autocmd VimEnter * call deoplete#custom#source('_',  'disabled_syntaxes', ['Comment', 'String'])
+" Plug '~/.cache/dein'
+" Plug 'Shougo/deoplete.nvim'
+" Plug 'deoplete-plugins/deoplete-jedi'
+" Plug 'Shougo/neosnippet'
 
-"- Basic setup -
-let g:mapleader = ","       "Change leader to a comma
-let g:enable_bold_font = 1  "Enable bold font in colorscheme
+Plug 'scrooloose/nerdtree'
+Plug 'xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+"Plug 'ryanoasis/nerd-fonts'
 
-"let g:python_host_prog = '/usr/bin/python'
-"let g:python3_host_prog = '/usr/bin/python3'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'cocopon/iceberg.vim'
+Plug 'majutsushi/tagbar'
+Plug 'junegunn/fzf'
 
-set nocompatible
-set background=dark                     "Set background to dark
-set hidden                              "Hide buffers in background
-set listchars=tab:\ \ ,trail:·          "Set trails for tabs and spaces
-set showmatch                           "Highlight matching bracket
-set showcmd                             "Show incomplete cmds down the bottom
-set noshowmode                          "Hide showmode because of the powerline plugin
-set conceallevel=2 concealcursor=i      "neosnippets conceal marker
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+"Plug 'w0rp/ale'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'hashivim/vim-terraform'
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'apzelos/blamer.nvim'
+
+" Python
+"Plug 'davidhalter/jedi-vim'
+Plug 'psf/black'
+
+Plug 'dpelle/vim-LanguageTool'
+
+let g:languagetool_jar='~/LanguageTool/*/languagetool-commandline.jar'
+
+" Latex
+Plug 'lervag/vimtex'
+
+Plug 'junegunn/limelight.vim'
+
+let g:vimtex_view_general_viewer = 'zathura'
+let g:vimtex_view_general_options
+    \ = '-reuse-instance -forward-search @tex @line @pdf'
+let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+let g:vimtex_compiler_latexmk = { 
+        \ 'executable' : 'latexmk',
+        \ 'options' : [ 
+        \   '-xelatex',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \ ],
+        \}
+let g:vimtex_compiler_latexmk_engines = {
+    \ '_'                : '-xelatex',
+    \ 'pdflatex'         : '-pdf',
+    \ 'dvipdfex'         : '-pdfdvi',
+    \ 'lualatex'         : '-lualatex',
+    \ 'xelatex'          : '-xelatex',
+    \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
+    \ 'context (luatex)' : '-pdf -pdflatex=context',
+    \ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
+    \}
+
+" Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'Shougo/deoplete.nvim'
+"Plug 'deoplete-plugins/deoplete-go', {'build': 'make'})
+
+" Web
+"Plug 'mattn/emmet-vim'
+
+" Initialize plugin system
+call plug#end()
+
+" ################### Basic setup #####################
 
 " enable syntax and plugins
 syntax enable
 filetype plugin on
+set encoding=UTF-8
 "autocmd vimenter * NERDTree
 
-colorscheme hybrid_material
+let g:mapleader = ","                   " Change leader to a comma
+let g:enable_bold_font = 1              " Enable bold font in colorscheme
 
-set laststatus=2
+"let g:python_host_prog = '/usr/bin/python'
+"let g:python3_host_prog = '/usr/bin/python3'
+
+set background=dark                     " Set background to dark
+set hidden                              " Hide buffers in background
+set listchars=tab:\ \ ,trail:·          " Set trails for tabs and spaces
+set showmatch                           " Highlight matching bracket
+set showcmd                             " Show incomplete cmds down the bottom
+set noshowmode                          " Hide showmode because of the powerline plugin
+set conceallevel=2 concealcursor=i      " neosnippets conceal marker
+set pastetoggle=<F2>
+set ruler
+set undolevels=100
+set laststatus=2                        " Always show the status line
+set nohlsearch                          " Disable search highlight
+
+" Colors
+colorscheme hybrid_material
+set t_Co=256        "Set 256 colors
+"highlight LineNr ctermfg=grey
+
 
 set number
 set relativenumber
 set numberwidth=4
-"highlight LineNr ctermfg=grey
 
+" Tabs
 set autoindent
 set tabstop=4
 set shiftwidth=4
 set smartindent
 set nofoldenable
+set expandtab
+set smarttab
 
-" ================ Auto commands ======================
+" Window splitting setup
+set splitright
+set splitbelow
+
+" turn off swap files
+set noswapfile
+set nobackup
+set nowb
+
+" Scrolling
+set scrolloff=8                           " Start scrolling when we're 8 lines away from margins
+set sidescrolloff=15
+set sidescroll=5
+
+" ################### Auto commands #####################
 
 augroup vimrc
     autocmd!
 augroup END
 
-autocmd vimrc BufWritePre * :call s:StripTrailingWhitespaces()                  "Auto-remove trailing spaces
-"autocmd vimrc InsertLeave * NeoSnippetClearMarkers                              "Remove unused markers for snippets
-autocmd vimrc InsertEnter * :set nocul                                          "Remove cursorline highlight
-autocmd vimrc InsertLeave * :set cul                                            "Add cursorline highlight in normal mode
-autocmd vimrc FileType html,javascript,coffee,cucumber setlocal sw=2 sts=2 ts=2 "Set 2 indent for html
-autocmd vimrc FileType php,javascript setlocal cc=80                            "Set right margin only for php and js
-autocmd vimrc VimEnter,BufNewFile,BufReadPost * call s:LoadLocalVimrc()         "Load per project vimrc (Used for custom test mappings, etc.)
+"autocmd vimrc BufWritePre * :call s:StripTrailingWhitespaces()                 " Auto-remove trailing spaces
+"autocmd vimrc InsertLeave * NeoSnippetClearMarkers                             " Remove unused markers for snippets
+autocmd vimrc InsertEnter * :set nocul                                          " Remove cursorline highlight
+autocmd vimrc InsertLeave * :set cul                                            " Add cursorline highlight in normal mode
+autocmd vimrc FileType html,javascript,coffee,cucumber setlocal sw=2 sts=2 ts=2 " Set 2 indent for html
+autocmd vimrc FileType php,javascript setlocal cc=80                            " Set right margin only for php and js
+"autocmd vimrc VimEnter,BufNewFile,BufReadPost * call s:LoadLocalVimrc()        " Load per project vimrc (Used for custom test mappings, etc.)
+"autocmd VimEnter * call deoplete#custom#source('_',  'disabled_syntaxes', ['Comment', 'String'])
 
 autocmd vimrc VimEnter * set vb t_vb=
 
 autocmd vimrc FileType nerdtree syntax match hideBracketsInNerdTree
             \ "\]" contained conceal containedin=ALL
+autocmd FileType nerdtree setlocal nolist
 
-" ================ Completion =======================
+autocmd filetype nerdtree highlight haskell_icon ctermbg=none ctermfg=Red guifg=#ffa500
+autocmd filetype nerdtree highlight html_icon ctermbg=none ctermfg=Red guifg=#ffa500
+autocmd filetype nerdtree highlight go_icon ctermbg=none ctermfg=Red guifg=#ffa500
+autocmd filetype nerdtree highlight python_icon ctermbg=none ctermfg=Blue guifg=#ffa500
 
-set wildmode=list:full
-set wildignore=*.o,*.obj,*~                                                     "stuff to ignore when tab completing
-set wildignore+=*vim/backups*
-set wildignore+=*sass-cache*
-set wildignore+=*cache*
-set wildignore+=*logs*
-set wildignore+=*node_modules/**
-set wildignore+=*DS_Store*
-set wildignore+=*.gem
-set wildignore+=log/**
-set wildignore+=tmp/**
-set wildignore+=*.png,*.jpg,*.gif
+autocmd filetype nerdtree syn match haskell_icon ## containedin=NERDTreeFlags
 
-" ================ Scrolling ========================
+autocmd BufWritePre *.py execute ':Black'
 
-set scrolloff=8                                                                 "Start scrolling when we're 8 lines away from margins
-set sidescrolloff=15
-set sidescroll=5
+autocmd BufWritePre *.tf execute ':TerraformFmt'
 
-" ================ Abbreviations ====================
-
-cnoreabbrev Wq wq
-cnoreabbrev WQ wq
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qa qa
-cnoreabbrev Bd bd
-cnoreabbrev bD bd
-cnoreabbrev wrap set wrap
-cnoreabbrev nowrap set nowrap
-cnoreabbrev bda BufOnly
-cnoreabbrev t tabe
-cnoreabbrev T tabe
-set expandtab
-
-set smarttab
-" set softtabstop=4
-
-set ruler
-
-set undolevels=100
-
-" Mappings
+" ################### Mappings #####################
 inoremap jk <esc>
 inoremap kj <esc>
 inoremap kl <esc>
 "nnoremap ; <shift>:
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :call ToggleNERDTree()<CR>
+
+function! ToggleNERDTree()
+  NERDTreeToggle
+  silent NERDTreeMirror
+endfunction
 
 " easier moving between tabs
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
+nnoremap <Leader>n <esc>:tabprevious<CR>
+nnoremap <Leader>m <esc>:tabnext<CR>
 
 " better indentation
 " Try to go into visual mode (v), thenselect several lines of code here and
@@ -186,36 +211,48 @@ map <Leader>m <esc>:tabnext<CR>
 vnoremap < <gv
 vnoremap > >gv
 
-" turn off swap files
-set noswapfile
-set nobackup
-set nowb
+" Terminal mappings
+tnoremap jk <C-\><C-n>
 
-set pastetoggle=<F2>
+" Python related
+nnoremap <Leader>b oimport pdb; pdb.set_trace()<esc>
+nnoremap <Leader>B Oimport pdb; pdb.set_trace()<esc>
+"nnoremap <Leader>b obreakpoint()<esc>
+"nnoremap <Leader>B Obreakpoint()<esc>
 
-" added later
-set t_Co=256        "Set 256 colors
+" Copy to system clipboard
+vnoremap <C-c> "+y
+" Paste from system clipboard with Ctrl + v
+inoremap <C-v> <Esc>"+p
 
-" Expand snippets on tab if snippets exists, otherwise do autocompletion
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\ : pumvisible() ? "\<C-n>" : "\<TAB>"
-" If popup window is visible do autocompletion from back
-imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" Fix for jumping over placeholders for neosnippet
-smap <expr><TAB> neosnippet#jumpable() ?
-\ "\<Plug>(neosnippet_jump)"
-\: "\<TAB>"
-  
-let g:neosnippet#disable_runtime_snippets = {'_' : 1}       "Snippets setup
+" Hacky solution to current window fullscreen toggle
+nnoremap <C-w>z :tabnew %<CR>
 
-" Deoplete config
-let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-let g:deoplete#enable_at_startup = 1              "Enable deoplete autocompletion
-let g:deoplete#file#enable_buffer_path = 0        "Autocomplete files relative to current buffer
+nnoremap <Leader>t :!pytest
 
+" Scrolling
+nnoremap J <C-d>    " scroll down
+nnoremap K <C-u>    " scroll up
+
+" Abbreviations
+cnoreabbrev Wq wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev wrap set wrap
+cnoreabbrev nowrap set nowrap
+cnoreabbrev git Git
+cnoreabbrev black Black
+cnoreabbrev co Commentary
+
+" Remap for rename current word
+nmap <leader>r <Plug>(coc-rename)
+nmap gr <Plug>(coc-references)
+nmap <leader>gi <Plug>(coc-implementation)
+
+" ################### Completion #####################
 set wildmode=list:full
-set wildignore=*.o,*.obj,*~             "stuff to ignore when tab completing
+set wildignore=*.o,*.obj,*~             " stuff to ignore when tab completing
 set wildignore+=*vim/backups*
 set wildignore+=*sass-cache*
 set wildignore+=*cache*
@@ -227,23 +264,77 @@ set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 
+" ################## Plugins related setup #####################
+
+" Expand snippets on tab if snippets exists, otherwise do autocompletion
+" imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+" \ "\<Plug>(neosnippet_expand_or_jump)"
+" \ : pumvisible() ? "\<C-n>" : "\<TAB>"
+" " If popup window is visible do autocompletion from back
+" imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" " Fix for jumping over placeholders for neosnippet
+" smap <expr><TAB> neosnippet#jumpable() ?
+" \ "\<Plug>(neosnippet_jump)"
+" \: "\<TAB>"
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  
+let g:neosnippet#disable_runtime_snippets = {'_' : 1}       "Snippets setup
+
+" Deoplete config
+"let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+"let g:deoplete#enable_at_startup = 1              "Enable deoplete autocompletion
+" Use ALE and also some plugin 'foobar' as completion sources for all code.
+"call deoplete#custom#option('sources', {
+"\ '_': ['ale'],
+"\})
+"let g:deoplete#file#enable_buffer_path = 0        "Autocomplete files relative to current buffer
+
 " Go config
 let g:go_info_mode='guru'
 let g:go_version_warning = 0
+let g:go_gopls_enabled = 0
 
 " Emmet configurations
 let g:user_emmet_leader_key='<C-L>'
 
 " Airline bar config
-let g:airline_powerline_fonts = 1       "Enable powerline fonts
-let g:airline_theme = "hybrid"          "Set theme to powerline default theme
-let g:airline_section_y = '%{substitute(getcwd(), expand("$HOME"), "~", "g")}'  "Set relative path
-let g:airline#extensions#whitespace#enabled = 0             "Disable whitespace extension
-let g:airline#extensions#tabline#enabled = 1                "Enable tabline extension
-let g:airline#extensions#tabline#left_sep = ' '             "Left separator for tabline
-let g:airline#extensions#tabline#left_alt_sep = '│'         "Right separator for tabline
+let g:airline_powerline_fonts = 1       " Enable powerline fonts
+let g:airline_theme = "hybrid"          " Set theme to powerline default theme
+let g:airline_section_y = '%{substitute(getcwd(), expand("$HOME"), "~", "g")}'  " Set relative path
+let g:airline#extensions#whitespace#enabled = 0             " Disable whitespace extension
+let g:airline#extensions#tabline#enabled = 1                " Enable tabline extension
+let g:airline#extensions#tabline#left_sep = ' '             " Left separator for tabline
+let g:airline#extensions#tabline#left_alt_sep = '│'         " Right separator for tabline
 
 " NerdTree config
-let g:NERDTreeChDirMode = 2             "Always change the root directory
-let g:NERDTreeMinimalUI = 1             "Disable help text and bookmark title
-let g:NERDTreeShowHidden = 1            "Show hidden files in NERDTree
+let g:NERDTreeChDirMode = 2             " Always change the root directory
+"let g:NERDTreeMinimalUI = 1             " Disable help text and bookmark title
+let g:NERDTreeShowHidden = 1            " Show hidden files in NERDTree
+let g:NERDTreeLimitedSyntax = 0 " limit syntax for the most popular extensions
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
+let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
+let g:DevIconsEnableFolderExtensionPatternMatching = 1
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
+
+let g:WebDevIconsUnicodeDecorateFileNodes = 0
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
+
+" Jedi (autocompletion library) config 
+" check doc :h jedi-vim
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_stubs_command = "<leader>s"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = ""
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = ""
+let g:jedi#rename_command = "<leader>r"
+
+" Ale config
+let g:ale_python_flake8_options = '--ignore=E501'
