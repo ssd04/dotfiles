@@ -171,6 +171,7 @@ setup_i3 ()
     sudo add-apt-repository ppa:kgilmer/speed-ricer
     sudo apt-get update
     install_package i3_gaps
+    install_package i3lock
     echo "Packages installed successfully."
     echo "Setup i3 ..."
     remove_file ~/.config/i3/config
