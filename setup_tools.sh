@@ -235,6 +235,17 @@ setup_neovim ()
     echo "Config file setup successfully."
 }
 
+install_nodejs()
+{
+    :'
+    Nodejs (at least v12.22.0) is required for coc.nvim plugin
+    '
+
+    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+
+    install_package nodejs
+}
+
 # Main program
 get_os_type
 setup_working_dir
