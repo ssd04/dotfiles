@@ -20,8 +20,9 @@ call plug#begin(stdpath('data') . '/plugged')
 
 " Plug '~/.cache/dein'
 " Plug 'Shougo/deoplete.nvim'
-" Plug 'deoplete-plugins/deoplete-jedi'
 " Plug 'Shougo/neosnippet'
+
+Plug 'junegunn/vader.vim'
 
 Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
@@ -50,7 +51,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'apzelos/blamer.nvim'
 
 " Python
-"Plug 'davidhalter/jedi-vim'
 Plug 'psf/black'
 
 Plug 'dpelle/vim-LanguageTool'
@@ -59,8 +59,7 @@ let g:languagetool_jar='~/LanguageTool/*/languagetool-commandline.jar'
 
 " Latex
 Plug 'lervag/vimtex'
-
-Plug 'junegunn/limelight.vim'
+" Plug 'ssd04/vim-piano-chords-latex'
 
 let g:vimtex_view_general_viewer = 'zathura'
 let g:vimtex_view_general_options
@@ -85,6 +84,9 @@ let g:vimtex_compiler_latexmk_engines = {
     \ 'context (luatex)' : '-pdf -pdflatex=context',
     \ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
     \}
+
+Plug 'junegunn/limelight.vim'
+Plug 'ap/vim-css-color'
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -201,6 +203,12 @@ function! ToggleNERDTree()
   silent NERDTreeMirror
 endfunction
 
+try 
+  source ~/dev/vim/vim-piano-chords-latex/plugin/piano-chords-latex.vim
+catch
+  " No such file? No problem; just ignore it.
+endtry
+
 " easier moving between tabs
 nnoremap <Leader>n <esc>:tabprevious<CR>
 nnoremap <Leader>m <esc>:tabnext<CR>
@@ -313,7 +321,7 @@ let g:NERDTreeChDirMode = 2             " Always change the root directory
 "let g:NERDTreeMinimalUI = 1             " Disable help text and bookmark title
 let g:NERDTreeShowHidden = 1            " Show hidden files in NERDTree
 let g:NERDTreeLimitedSyntax = 0 " limit syntax for the most popular extensions
-let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
 let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
 let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
 let g:DevIconsEnableFolderExtensionPatternMatching = 1
@@ -324,17 +332,6 @@ let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
 
 let g:WebDevIconsUnicodeDecorateFileNodes = 0
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
-
-" Jedi (autocompletion library) config 
-" check doc :h jedi-vim
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_stubs_command = "<leader>s"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = ""
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = ""
-let g:jedi#rename_command = "<leader>r"
 
 " Ale config
 let g:ale_python_flake8_options = '--ignore=E501'
