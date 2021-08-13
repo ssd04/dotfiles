@@ -31,10 +31,10 @@ alias gitb='git branch'
 #alias scpfs="sshfs $1:/home/darius /home/darius/$1_mnt; vifm /home/darius/$1_mnt; fusermount -u /home/darius/$1_mnt"
 
 # Security updates
-alias sec='sudo apt-get update && { sudo apt-get -s dist-upgrade | grep "^Inst" | grep -i securi | cut -d " " -f 2 | xargs sudo apt-get install }'
+alias sec='sudo apt-get update && { sudo apt-get -s dist-upgrade | grep "^Inst" | grep -i securi | cut -d " " -f 2 | xargs sudo apt-get install -y }'
 
 # Work related
 alias cdi="cd ~/VismaWork/inschool"
-alias cdp="cd ~/VismaWork/pads"
+alias cdp="cd ~/VismaWork/pads/dev"
 alias myip="curl ifconfig.me"
-alias vpn="/opt/cisco/anyconnect/bin/vpn"
+alias vpn="/home/darius/VismaWork/scripts/vpn.sh"
