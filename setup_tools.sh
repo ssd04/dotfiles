@@ -246,6 +246,11 @@ install_nodejs()
     install_package nodejs
 }
 
+cpp_setup()
+{
+    install_package ccls
+}
+
 # Main program
 get_os_type
 setup_working_dir
