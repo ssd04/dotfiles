@@ -27,7 +27,6 @@ Plug 'junegunn/vader.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
 "Plug 'ryanoasis/nerd-fonts'
 
 Plug 'vim-airline/vim-airline'
@@ -40,7 +39,6 @@ Plug 'junegunn/fzf'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-"Plug 'w0rp/ale'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -95,6 +93,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Web
 "Plug 'mattn/emmet-vim'
+"
+Plug 'ryanoasis/vim-devicons'
 
 " Initialize plugin system
 call plug#end()
@@ -274,35 +274,22 @@ set wildignore+=*.png,*.jpg,*.gif
 
 " ################## Plugins related setup #####################
 
-" Expand snippets on tab if snippets exists, otherwise do autocompletion
-" imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-" \ "\<Plug>(neosnippet_expand_or_jump)"
-" \ : pumvisible() ? "\<C-n>" : "\<TAB>"
-" " If popup window is visible do autocompletion from back
-" imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" " Fix for jumping over placeholders for neosnippet
-" smap <expr><TAB> neosnippet#jumpable() ?
-" \ "\<Plug>(neosnippet_jump)"
-" \: "\<TAB>"
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-  
-let g:neosnippet#disable_runtime_snippets = {'_' : 1}       "Snippets setup
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
 
-" Deoplete config
-"let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-"let g:deoplete#enable_at_startup = 1              "Enable deoplete autocompletion
-" Use ALE and also some plugin 'foobar' as completion sources for all code.
-"call deoplete#custom#option('sources', {
-"\ '_': ['ale'],
-"\})
-"let g:deoplete#file#enable_buffer_path = 0        "Autocomplete files relative to current buffer
+" Avoid showing message extra message when using completion
+set shortmess+=c
 
 " Go config
 let g:go_info_mode='guru'
 let g:go_version_warning = 0
 let g:go_gopls_enabled = 0
+let g:go_fmt_autosave = 0
+" let g:go_fmt_command = "goimports"
 
 " Emmet configurations
 let g:user_emmet_leader_key='<C-L>'
@@ -335,3 +322,5 @@ let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
 
 " Ale config
 let g:ale_python_flake8_options = '--ignore=E501'
+
+set guifont=DroidSansMono\ Nerd\ Font\ 11
