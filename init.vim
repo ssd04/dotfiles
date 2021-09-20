@@ -255,8 +255,10 @@ cnoreabbrev co Commentary
 
 " Remap for rename current word
 nmap <leader>r <Plug>(coc-rename)
-nmap gr <Plug>(coc-references)
-nmap <leader>gi <Plug>(coc-implementation)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " ################### Completion #####################
 set wildmode=list:full
@@ -287,9 +289,13 @@ set shortmess+=c
 " Go config
 let g:go_info_mode='guru'
 let g:go_version_warning = 0
-let g:go_gopls_enabled = 0
+let g:go_gopls_enabled = 1
 let g:go_fmt_autosave = 0
-" let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "goimports"
+let g:go_bin_path = $GOPATH . "/bin"
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_def_mapping_enabled = 0
 
 " Emmet configurations
 let g:user_emmet_leader_key='<C-L>'
