@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+: '
+Create windows setup for dev work
+'
+
+tmux split-window -c "#{pane_current_path}" ; 
+tmux resize-pane -D 15 ; 
+tmux split-window -h -c "#{pane_current_path}" ; 
+tmux last-pane ;
+tmux select-pane -U ;
+nvim .

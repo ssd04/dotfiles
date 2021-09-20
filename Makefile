@@ -28,3 +28,8 @@ sync-i3:
 	rsync \
 		-avh --no-perms \
 		.config/i3 ~/.config;
+
+sync-local:
+	rsync \
+		-avh --no-perms \
+		.local ~;

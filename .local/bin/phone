@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+: '
+Mount Android Phone.
+jmtpfs has to be installed due to incompatibility between MTP and regular USB
+'
+
+jmtpfs /mnt/phone

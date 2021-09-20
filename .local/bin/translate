@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+: '
+Translate from Romanian to English
+'
+
+args="${@}"
+trans -brief ro:en ${args}
+
