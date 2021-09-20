@@ -7,10 +7,20 @@ Each config file on the system is a link to the coresponding file in the repo di
 
 ## Setup
 
-There is a `setup_tools.sh` script that can be used to run the
-initial configuration for each tool.
+The config files can be synced using `rsync` tool.
+There are several make command for this:
 
-Run with help arg to see the command line parameters:
 ```bash
-./setup_tools.sh --help
+# Sync all files including directories
+make sync-all
+```
+
+```bash
+# Sync only .config dir
+make sync-config
+```
+
+```bash
+# Sync NeoVim configuration
+make sync-nvim
 ```
