@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+: '
+Print temperature based on wttr.in
+It will print based on current location, by default.
+'
+
+curl wttr.in
