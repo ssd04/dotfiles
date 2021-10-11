@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+profile_name=$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 16 | head -n 1)
+chrome=$(which google-chrome)
+
+${chrome} --profile-directory=${profile_name} --incognito >/dev/null 2>&1
