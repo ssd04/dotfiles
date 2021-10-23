@@ -28,6 +28,7 @@ sync-i3:
 	rsync \
 		-avh --no-perms \
 		.config/i3 ~/.config;
+	~/.local/bin/i3-config-update
 
 sync-local:
 	rsync \

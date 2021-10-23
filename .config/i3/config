@@ -207,8 +207,6 @@ exec --no-startup-id clipit
 # DP-3  -> external monitor
 #
 
-include ~/.config/i3/config.d/monitor-`xrandr -q | grep ' connected' | cut -d ' ' -f1`.conf
-
 # Workaround for slack calls floating window
 for_window [class="Slack" floating] move container to workspace current
 

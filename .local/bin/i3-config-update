@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+# set -x
+
+# i3 window manager setup
+num_of_monitors=$(xrandr -q | grep " connected" | wc -l)
+
+if [ "$num_of_monitors" -ge 2 ]; then
+    for i in `xrandr -q | grep " connected" | cut -d ' ' -f1`; do
+        cat ~/.config/i3/config.d/monitor-${i}.conf >> ~/.config/i3/config
+    done
+fi
+
+unset num_of_monitors
