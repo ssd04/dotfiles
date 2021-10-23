@@ -26,6 +26,6 @@ export GOBIN=$GOPATH/bin
 # Latex setup
 export MANPATH="$MANPATH:/usr/local/texlive/2020/texmf-dist/doc/man"
 export INFOPATH="$INFOPATH:/usr/local/texlive/2020/texmf-dist/doc/info"
-export PATH=$PATH:/usr/local/go/bin:/usr/local/texlive/2020/bin/x86_64-linux
+export PATH=$PATH:$HOME/.local/bin:/usr/local/go/bin:/usr/local/texlive/2020/bin/x86_64-linux
 
 [[ $TERM != "screen-256color" ]] && exec tmux -2
