@@ -201,18 +201,13 @@ exec --no-startup-id feh --bg-scale ~/.config/i3/i3wallpaper.jpg
 exec --no-startup-id redshift
 exec --no-startup-id clipit
 
+
 # Monitors setup
 # eDP-1 -> laptop monitor
 # DP-3  -> external monitor
 #
-# Set external monitor as primary
-exec --no-startup-id xrandr --output DP-3 --primary
 
-workspace 1 output DP-3
-workspace 2 output DP-3
-workspace 3 output DP-3
-workspace 4 output DP-3
-workspace 5 output eDP-1
+include ~/.config/i3/config.d/monitor-`xrandr -q | grep ' connected' | cut -d ' ' -f1`.conf
 
 # Workaround for slack calls floating window
 for_window [class="Slack" floating] move container to workspace current
