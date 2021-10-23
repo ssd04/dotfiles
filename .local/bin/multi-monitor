@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+: '
+Get the number of connected monitors on the system.
+
+Returns a string label: "single" or "multi"
+'
+
+num_of_monitors=$(xrandr -q | grep " connected" | wc -l)
+
+if [[ "$num_of_monitors" -eq 1 ]]; then
+    echo "single"
+elif [[ "$num_of_monitors" -ge 2 ]]; then
+    echo "multi"
+fi
+
