@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# set -x
+
+usage()
+{
+    printf "\nUsage example:\n\tjumps office 8081 my.great.external.domain 443\n\n";
+    exit 0
+}
+
+jump_forwarding()
+{
+    # SSH Port Forwading
+    # 
+    # Input:
+    #     jump_host: str
+    #     local_port: int
+    #     host_name: str
+    #     host_port: int
+
+    local jump_host=$1
+    local local_port=$2
+    local host_name=$3
+    local host_port=$4
+
+    ssh -fN \
+        -L ${local_port}:${host_name}:${host_port} \
+        -o ExitOnForwardFailure=True \
+        -o StrictHostKeyChecking=no \
+        -o ConnectTimeout=10 \
+        ${jump_host}
+}
+
+
+main()
+{
+    if [ $# -eq 0 ]; then
+        usage
+    fi
+
+    jump_forwarding $@
+}
+
+main $@
+
+exit 0
