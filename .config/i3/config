@@ -183,8 +183,8 @@ bindsym $mod+n       exec firefox news.ycombinator.com
 bindsym --release XF86Copy  exec --no-startup-id ~/.config/i3/scripts/smart-copy
 bindsym --release XF86Paste exec --no-startup-id ~/.config/i3/scripts/smart_paste
 
-bindsym $mod+w       exec --no-startup-id /home/darius/VismaWork/scripts/pass.sh
-bindsym $mod+q       exec --no-startup-id /home/darius/VismaWork/scripts/token.sh
+bindsym $mod+w       exec --no-startup-id ~/.local/bin/pass.sh
+bindsym $mod+q       exec --no-startup-id ~/.local/bin/token.sh
 
 # Screenshoot setup
 # take a screenshot of a screen region and copy it to a clipboard
