@@ -29,9 +29,3 @@ alias gitb='git branch'
 
 # Security updates
 alias sec='sudo apt-get update && { sudo apt-get -s dist-upgrade | grep "^Inst" | grep -i securi | cut -d " " -f 2 | xargs sudo apt-get install -y }'
-
-# Work related
-alias cdi="cd ~/VismaWork/inschool"
-alias cdp="cd ~/VismaWork/pads/dev"
-alias myip="curl ifconfig.me"
-alias vpn="/home/darius/VismaWork/scripts/vpn.sh"

@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+# set -x
+
+ANYCONNECT_VPN=/opt/cisco/anyconnect/bin/vpn
+
+# Config file format
+# 
+# $ cat ~/.anyconnect_config
+# [vpn]
+# hostname=my.hostname.com
+# username=mygreatusername
+# pass_identifier=someidentifier
+# token_identifier=someidentifier
+config_file=~/.anyconnect_config
+
+print_help () {
+cat <<HELP
+Usage: ${PROGNAME} state|disconnect|connect|full_connect
+HELP
+}
+
+connect_to_vpn()
+{
+    # Connect to Anyconnect automatically
+    # Creds from password manager
+
+    # Read config file
+    while read line; do 
+        if [[ $line =~ ^"["(.+)"]"$ ]]; then 
+            arrname=${BASH_REMATCH[1]}
+            declare -A $arrname
+        elif [[ $line =~ ^(.*)"="(.*) ]]; then 
+            declare ${arrname}[${BASH_REMATCH[1]}]="${BASH_REMATCH[2]}"
+        fi
+    done < ${config_file}
+
+    local pass_identifier=${vpn[pass_identifier]}
+    local host=${vpn[hostname]}
+    local password=$(pass ${vpn[pass_identifier]})
+    local username=${vpn[username]}
+    local connect_group=${1:-2}
+
+    local token_code=$(pass ${vpn[token_identifier]})
+    local token=$(oathtool -b --totp ${token_code})
+
+    # treat password as a string when printf since it can contain special
+    # bash characters
+    printf "${connect_group}\n${username}\n%s\n${token}\n" ${password} \
+         | ${ANYCONNECT_VPN} -s connect ${host}
+}
+
+main()
+{
+    case $1 in
+        "state") 
+            ${ANYCONNECT_VPN} state
+            ;;
+        "disconnect")
+            ${ANYCONNECT_VPN} disconnect
+            ;;
+        "connect")
+            connect_to_vpn
+            ;;
+        "full_connect")
+            connect_to_vpn 3
+            ;;
+        *)
+            print_help
+            ;;
+    esac
+}
+
+main $@
+
+exit 0
