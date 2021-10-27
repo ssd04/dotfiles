@@ -3,10 +3,6 @@
 #
 # README
 #
-# xfce4-terminal menu shortcuts
-#   - F11 -> toggle fullscreen mode
-#   - F10 -> Show menubar
-#
 # ( parensleft
 # [ bracketleft
 # { braceleft
@@ -214,10 +210,9 @@ for_window [class="Slack" floating] move container to workspace current
 assign [class="Brave"] 2
 assign [class="Google"] 3
 assign [class="st"] 1
-assign [class="xfce4-terminal"] 5
 assign [class="Slack"] 5
 
 exec --no-startup-id i3-msg 'workspace 1; exec st'
 exec --no-startup-id i3-msg 'workspace 2; exec brave-browser'
 exec --no-startup-id i3-msg 'workspace 3; exec google-chrome'
-exec --no-startup-id i3-msg 'workspace 5; exec xfce4-terminal; exec slack'
+exec --no-startup-id i3-msg 'workspace 5; exec slack'
