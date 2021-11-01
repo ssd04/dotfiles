@@ -29,3 +29,5 @@ alias gitb='git branch'
 
 # Security updates
 alias sec='sudo apt-get update && { sudo apt-get -s dist-upgrade | grep "^Inst" | grep -i securi | cut -d " " -f 2 | xargs sudo apt-get install -y }'
+
+alias lock='i3lock -c 333333'
