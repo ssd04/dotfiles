@@ -34,7 +34,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'cocopon/iceberg.vim'
 Plug 'majutsushi/tagbar'
-Plug 'junegunn/fzf'
+
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -242,6 +244,9 @@ nnoremap <Leader>t :!pytest
 nnoremap J <C-d>    " scroll down
 nnoremap K <C-u>    " scroll up
 
+nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <Leader>f :Rg<CR>
+
 " Abbreviations
 cnoreabbrev Wq wq
 cnoreabbrev WQ wq
@@ -290,7 +295,7 @@ set shortmess+=c
 let g:go_info_mode='guru'
 let g:go_version_warning = 0
 let g:go_gopls_enabled = 1
-let g:go_fmt_autosave = 0
+let g:go_fmt_autosave = 1
 let g:go_fmt_command = "goimports"
 let g:go_bin_path = $GOPATH . "/bin"
 let g:go_def_mode='gopls'
