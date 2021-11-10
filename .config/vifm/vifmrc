@@ -485,3 +485,6 @@ highlight SuggestBox cterm=bold ctermfg=default ctermbg=default
 if $USER == 'root'
     highlight Border ctermbg=red
 endif
+
+" Show hidden files
+set dotfiles
