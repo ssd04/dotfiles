@@ -16,6 +16,8 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 # enable vi mode
 bindkey -v
 
+bindkey "^R" history-incremental-search-backward
+
 # Enable click by one touchpad touch
 synclient TapButton1=1
 
@@ -26,6 +28,6 @@ export GOBIN=$GOPATH/bin
 # Latex setup
 export MANPATH="$MANPATH:/usr/local/texlive/2020/texmf-dist/doc/man"
 export INFOPATH="$INFOPATH:/usr/local/texlive/2020/texmf-dist/doc/info"
-export PATH=$PATH:$HOME/.local/bin:/usr/local/go/bin:/usr/local/texlive/2020/bin/x86_64-linux
+export PATH=$PATH:$HOME/.local/bin:$GOBIN:/usr/local/go/bin:/usr/local/texlive/2020/bin/x86_64-linux
 
 [[ $TERM != "screen-256color" ]] && exec tmux -2
