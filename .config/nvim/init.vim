@@ -31,7 +31,10 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
 Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'mhartington/oceanic-next'
+
 Plug 'cocopon/iceberg.vim'
 Plug 'majutsushi/tagbar'
 
@@ -129,7 +132,11 @@ set laststatus=2                        " Always show the status line
 set nohlsearch                          " Disable search highlight
 
 " Colors
-colorscheme hybrid_material
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+colorscheme OceanicNext
 set t_Co=256        "Set 256 colors
 "highlight LineNr ctermfg=grey
 
@@ -160,6 +167,12 @@ set nowb
 set scrolloff=8                           " Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=5
+
+" Automatically adjust quickfix windows
+au FileType qf call AdjustWindowHeight(3, 20)
+function! AdjustWindowHeight(minheight, maxheight)
+  exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
+endfunction
 
 " ################### Auto commands #####################
 
@@ -229,6 +242,13 @@ nnoremap <Leader>b oimport pdb; pdb.set_trace()<esc>
 nnoremap <Leader>B Oimport pdb; pdb.set_trace()<esc>
 "nnoremap <Leader>b obreakpoint()<esc>
 "nnoremap <Leader>B Obreakpoint()<esc>
+
+" Golang
+cnoreabbrev gc GoCoverageToggle
+cnoreabbrev gtf GoTestFunc
+cnoreabbrev gtc GoTestCompile
+cnoreabbrev gt GoTest
+cnoreabbrev gb GoBuild
 
 " Copy to system clipboard
 vnoremap <C-c> "+y
