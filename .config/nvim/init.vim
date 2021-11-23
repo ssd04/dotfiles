@@ -36,6 +36,7 @@ Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'mhartington/oceanic-next'
 
 Plug 'cocopon/iceberg.vim'
+
 Plug 'majutsushi/tagbar'
 
 Plug 'junegunn/fzf.vim'
@@ -218,11 +219,13 @@ function! ToggleNERDTree()
   silent NERDTreeMirror
 endfunction
 
-try 
-  source ~/dev/vim/vim-piano-chords-latex/plugin/piano-chords-latex.vim
-catch
-  " No such file? No problem; just ignore it.
-endtry
+nnoremap <C-b> :Tagbar<CR>
+
+" try 
+"   source ~/dev/vim/vim-piano-chords-latex/plugin/piano-chords-latex.vim
+" catch
+"   " No such file? No problem; just ignore it.
+" endtry
 
 " easier moving between tabs
 nnoremap <Leader>n <esc>:tabprevious<CR>
