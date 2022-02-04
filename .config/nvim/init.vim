@@ -63,7 +63,7 @@ let g:languagetool_jar='~/LanguageTool/*/languagetool-commandline.jar'
 
 " Latex
 Plug 'lervag/vimtex'
-" Plug 'ssd04/vim-piano-chords-latex'
+Plug 'ssd04/vim-piano-chords-latex'
 
 let g:vimtex_view_general_viewer = 'zathura'
 let g:vimtex_view_general_options
@@ -96,6 +96,8 @@ Plug 'ap/vim-css-color'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 "Plug 'Shougo/deoplete.nvim'
 "Plug 'deoplete-plugins/deoplete-go', {'build': 'make'})
+
+"Plug 'leafgarland/typescript-vim'
 
 " Web
 "Plug 'mattn/emmet-vim'
@@ -319,6 +321,8 @@ let g:go_info_mode='guru'
 let g:go_version_warning = 0
 let g:go_gopls_enabled = 1
 let g:go_fmt_autosave = 1
+let g:go_imports_autosave = 1
+let g:go_imports_mode='gopls'
 let g:go_fmt_command = "goimports"
 let g:go_bin_path = $GOPATH . "/bin"
 let g:go_def_mode='gopls'
