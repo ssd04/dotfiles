@@ -4,6 +4,8 @@ if &compatible
     set nocompatible
 endif
 
+let g:ale_disable_lsp = 1
+
 " ################### Plug setup #####################
 "
 " install vim-plug if not already there
@@ -49,6 +51,8 @@ Plug 'tpope/vim-repeat'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'hashivim/vim-terraform'
+
+Plug 'dense-analysis/ale'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -290,6 +294,13 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
 " ################### Completion #####################
 set wildmode=list:full
 set wildignore=*.o,*.obj,*~             " stuff to ignore when tab completing
@@ -319,7 +330,7 @@ set shortmess+=c
 " Go config
 let g:go_info_mode='guru'
 let g:go_version_warning = 0
-let g:go_gopls_enabled = 1
+let g:go_gopls_enabled = 0
 let g:go_fmt_autosave = 1
 let g:go_imports_autosave = 1
 let g:go_imports_mode='gopls'
@@ -328,6 +339,7 @@ let g:go_bin_path = $GOPATH . "/bin"
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_def_mapping_enabled = 0
+let g:go_metalinter_command = 'golangci-lint'
 
 " Emmet configurations
 let g:user_emmet_leader_key='<C-L>'

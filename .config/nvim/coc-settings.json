@@ -5,6 +5,7 @@
     "java.completion.enabled": true,
     "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar",
     "java.format.settings.url": "/home/darius/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml",
+    "diagnostic.displayByAle": true,
     "languageserver": {
         "ccls": {
             "command": "ccls",
@@ -29,6 +30,7 @@
         },
         "golang": {
             "command": "gopls",
+            "args": ["-remote=auto"],
             "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
             "filetypes": ["go"]
         }
