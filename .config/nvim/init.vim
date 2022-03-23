@@ -103,6 +103,22 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 "Plug 'leafgarland/typescript-vim'
 
+" Track the engine.
+Plug 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
+
+" Trigger configuration. You need to change this to something other than
+" <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 " Web
 "Plug 'mattn/emmet-vim'
 "
