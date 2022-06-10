@@ -5,6 +5,8 @@ alias pdf='xdg-open'
 alias ll='ls -la'
 alias l='ls -l'
 alias ls='ls --color=auto'
+alias grepr='grep -Hrn'
+alias grepi='grep -Hrni'
 
 # Arch Linux related shortcuts
 alias pcmi='sudo pacman -S'
