@@ -1,5 +1,14 @@
+SHELL := $(shell which bash)
 
-.PHONY: sync-all sync-config
+.DEFAULT_GOAL := help
+
+.PHONY: help sync-all sync-config sync-nvim sync-i3 sync-local
+
+help:
+	@echo -e ""
+	@echo -e "Make commands:"
+	@grep -E '^[a-zA-Z_-]+:.*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":"}; {printf "\t\033[36m%-30s\033[0m\n", $$1}'
+	@echo -e ""
 
 sync-all:
 	rsync \
