@@ -7,6 +7,7 @@ alias l='ls -l'
 alias ls='ls --color=auto'
 alias grepr='grep -Hrn'
 alias grepi='grep -Hrni'
+alias tarx='tar -xvzf'
 
 # Arch Linux related shortcuts
 alias pcmi='sudo pacman -S'
@@ -36,4 +37,4 @@ alias sec='sudo apt-get update && { sudo apt-get -s dist-upgrade | grep "^Inst" 
 alias lock='i3lock -c 333333'
 
 # golang
-alias gotest='go test ./...'
+alias gotest='go test -v -race ./...'
