@@ -30,4 +30,7 @@ export MANPATH="$MANPATH:/usr/local/texlive/2020/texmf-dist/doc/man"
 export INFOPATH="$INFOPATH:/usr/local/texlive/2020/texmf-dist/doc/info"
 export PATH=$PATH:$HOME/.local/bin:$GOBIN:/usr/local/go/bin:/usr/local/texlive/2020/bin/x86_64-linux
 
+# Disable globbing for all commands
+unsetopt nomatch
+
 [[ $TERM != "screen-256color" ]] && exec tmux -2
