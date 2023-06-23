@@ -1,6 +1,7 @@
 # Query feeds
-"query:All articles:age > 0"
+"query:All unread articles:(unread = \"yes\") and age > 0"
 "query:Life articles:(tags # \"life\")"
+"query:All articles:age > 0"
 
 # life
 https://feeds.feedburner.com/brainpickings/rss

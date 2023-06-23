@@ -1,4 +1,5 @@
-
+# general settings
+auto-reload yes
 
 # vim key bindings
 unbind-key h
@@ -19,3 +20,8 @@ color listfocus          black     cyan
 color listfocus_unread   black     cyan
 color info               default   black
 color article            default   default
+
+# highlights
+highlight article "^(Title):.*$" blue default
+highlight article "https?://[^ ]+" red default
+highlight article "\\[image\\ [0-9]+\\]" green default
