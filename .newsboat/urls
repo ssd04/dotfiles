@@ -1,0 +1,12 @@
+# Query feeds
+"query:All articles:age > 0"
+"query:Life articles:(tags # \"life\")"
+
+# life
+https://feeds.feedburner.com/brainpickings/rss
+https://data.fineartstudioonline.com/rssfeed.asp?id=47118
+https://theconvivialsociety.substack.com/feed life
+https://www.experimental-history.com/feed
+
+# code
+https://vitalik.ca/feed.xml
