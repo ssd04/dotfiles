@@ -4,8 +4,6 @@ if &compatible
     set nocompatible
 endif
 
-let g:ale_disable_lsp = 1
-
 " ################### Plug setup #####################
 "
 " install vim-plug if not already there
@@ -53,6 +51,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'hashivim/vim-terraform'
 
 Plug 'dense-analysis/ale'
+
+let g:ale_disable_lsp = 0
+let g:ale_enabled = 1
+
 
 " Git
 Plug 'tpope/vim-fugitive'
