@@ -135,7 +135,6 @@ call plug#end()
 syntax enable
 filetype plugin on
 set encoding=UTF-8
-"autocmd vimenter * NERDTree
 
 let g:mapleader = ","                   " Change leader to a comma
 let g:enable_bold_font = 1              " Enable bold font in colorscheme
@@ -225,6 +224,7 @@ autocmd filetype nerdtree highlight html_icon ctermbg=none ctermfg=Red guifg=#ff
 autocmd filetype nerdtree highlight go_icon ctermbg=none ctermfg=Red guifg=#ffa500
 autocmd filetype nerdtree highlight python_icon ctermbg=none ctermfg=Blue guifg=#ffa500
 
+autocmd vimenter * NERDTree
 autocmd filetype nerdtree syn match haskell_icon ## containedin=NERDTreeFlags
 
 autocmd BufWritePre *.py execute ':Black'
