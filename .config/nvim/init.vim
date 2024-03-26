@@ -126,6 +126,11 @@ let g:UltiSnipsEditSplit="vertical"
 "
 Plug 'ryanoasis/vim-devicons'
 
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
+
+
 " Initialize plugin system
 call plug#end()
 

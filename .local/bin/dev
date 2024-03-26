@@ -9,4 +9,4 @@ tmux resize-pane -D 15 ;
 tmux split-window -h -c "#{pane_current_path}" ; 
 tmux last-pane ;
 tmux select-pane -U ;
-nvim .
+nvim
