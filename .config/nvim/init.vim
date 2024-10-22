@@ -105,6 +105,9 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 "Plug 'leafgarland/typescript-vim'
 
+" Rust
+Plug 'rust-lang/rust.vim'
+
 " Track the engine.
 Plug 'SirVer/ultisnips'
 
@@ -363,6 +366,9 @@ let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_def_mapping_enabled = 0
 let g:go_metalinter_command = 'golangci-lint'
+
+" Rust config
+let g:rustfmt_autosave = 1
 
 " Emmet configurations
 let g:user_emmet_leader_key='<C-L>'
