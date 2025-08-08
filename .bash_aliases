@@ -38,3 +38,4 @@ alias lock='i3lock -c 333333'
 
 # golang
 alias gotest='go test -v -race ./...'
+alias gotestr='go test -v -run' 
