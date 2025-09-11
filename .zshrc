@@ -32,5 +32,3 @@ export PATH=$PATH:$HOME/.local/bin:$GOBIN:/usr/local/go/bin:/usr/local/texlive/2
 
 # Disable globbing for all commands
 unsetopt nomatch
-
-[[ $TERM != "screen-256color" ]] && exec tmux -2
